@@ -1,5 +1,3 @@
 require "errbit_plugin/version"
-
-module ErrbitPlugin
-  # Your code goes here...
-end
+require "errbit_plugin/register_plugin"
+require "errbit_plugin/errbit_plugin"
