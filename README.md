@@ -1,6 +1,6 @@
 # ErrbitPlugin
 
-TODO: Write a gem description
+Gem to inherit to create Errbit plugin
 
 ## Installation
 
