@@ -1,3 +1,18 @@
+
+if ENV['COVERAGE']
+  require 'simplecov'
+  if ENV['CI']
+    require 'coveralls'
+    Coveralls.wear!
+    SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+      SimpleCov::Formatter::HTMLFormatter,
+      Coveralls::SimpleCov::Formatter
+    ]
+  end
+
+  SimpleCov.start
+end
+
 require 'errbit_plugin'
 
 RSpec.configure do |config|
