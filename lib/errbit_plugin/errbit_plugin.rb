@@ -1,15 +1,20 @@
-require 'abstract_type'
 module ErrbitPlugin
   class IssueTracker
 
-    include AbstractType
+    def initialize(app, params)
+      @app = app
+      @params = params
+    end
+    attr_reader :app, :params
 
-    abstract_method :label
-    abstract_method :note
-    abstract_method :fields
-    abstract_method :configured?
-    abstract_method :check_params
-    abstract_method :create_issue
-    abstract_method :url
+    def add_error(key, msg)
+      @errors ||= {}
+      @errors[key] ||= []
+      @errors[key] << msg
+    end
+
+  def issue_title(problem)
+    "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
+  end
   end
 end

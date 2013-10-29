@@ -17,6 +17,10 @@ module ErrbitPlugin
       @issue_trackers
     end
 
+    def self.issue_tracker(key)
+      issue_trackers[key]
+    end
+
     def self.clear
       @issue_trackers = {}
     end

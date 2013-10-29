@@ -1,10 +1,10 @@
-require 'abstract_type'
-
 module ErrbitPlugin
   class ValidateIssueTracker
     def initialize(klass)
       @klass = klass
+      @errors = []
     end
+    attr_reader :errors
 
     def valid?
       good_inherit? &&
@@ -18,23 +18,32 @@ module ErrbitPlugin
     private
 
     def good_inherit?
-      @klass.ancestors.include?(ErrbitPlugin::IssueTracker)
+      unless @klass.ancestors.include?(ErrbitPlugin::IssueTracker)
+        add_errors(:not_inherited)
+        false
+      else
+        true
+      end
     end
 
     def implement_method?
-      begin
-        [:label, :fields, :configured?, :check_params, :create_issue, :url].each do |method|
-          instance.send(method)
+      [:comments_allowed?, :label, :fields, :configured?, :check_params, :create_issue, :url].all? do |method|
+        if instance.respond_to?(method)
+          true
+        else
+          add_errors(:method_missing, method)
+          false
         end
-        true
-      rescue NotImplementedError
-        false
       end
     end
 
-      def instance
-        @instance ||= @klass.new
-      end
+    def instance
+      @instance ||= @klass.new(Object.new, {})
+    end
+
+    def add_errors(key, value=nil)
+      @errors << [key, value].compact
+    end
 
   end
 end
