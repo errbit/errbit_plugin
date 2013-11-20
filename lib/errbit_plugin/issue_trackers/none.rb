@@ -2,7 +2,7 @@ module ErrbitPlugin
   class NoneIssueTracker < IssueTracker
     def label; 'none'; end
     def note; 'When no issue tracker has been configured, you will be able to leave comments on errors.'; end
-    def fields; []; end
+    def fields; {}; end
     ##
     # The NoneIssueTracker is mark like configured? false because it not valid
     # like a real IssueTracker

@@ -4,14 +4,17 @@ module ErrbitPlugin
     def note; 'A fake issue tracker to help in testing purpose'; end
     def fields
       {
-        :foo => 'bar'
+        :foo => {:label => 'foo'},
+        :bar => {:label => 'bar'}
       }
     end
     ##
     # The NoneIssueTracker is mark like configured? false because it not valid
     # like a real IssueTracker
-    def configured?; true; end
-    def check_params; true; end
+    def configured?; check_params; end
+    def check_params
+      params[:foo] && params[:bar]
+    end
     def create_issue; true; end
     def url; ''; end
     def comments_allowed?; false; end
