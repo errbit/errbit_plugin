@@ -27,7 +27,7 @@ module ErrbitPlugin
     end
 
     def implement_method?
-      [:comments_allowed?, :label, :fields, :configured?, :check_params, :create_issue, :url].all? do |method|
+      [:comments_allowed?, :label, :fields, :configured?, :check_params, :create_issue, :url, :note].all? do |method|
         if instance.respond_to?(method)
           true
         else
