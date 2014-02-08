@@ -196,5 +196,27 @@ describe ErrbitPlugin::ValidateIssueTracker do
         expect(is.errors).to eql [[:method_missing, :comments_allowed?]]
       end
     end
+
+    context "without note method" do
+      class BazNote < ErrbitPlugin::IssueTracker
+        def label; 'foo'; end
+        def fields; ['foo']; end
+        def configured?; true; end
+        def check_params; true; end
+        def create_issue; 'http'; end
+        def url; 'foo'; end
+        def comments_allowed?; false; end
+      end
+
+      it 'not valid' do
+        expect(ErrbitPlugin::ValidateIssueTracker.new(BazNote).valid?).to be_false
+      end
+
+      it 'say not implement comments_allowed?' do
+        is = ErrbitPlugin::ValidateIssueTracker.new(BazNote)
+        is.valid?
+        expect(is.errors).to eql [[:method_missing, :note]]
+      end
+    end
   end
 end
