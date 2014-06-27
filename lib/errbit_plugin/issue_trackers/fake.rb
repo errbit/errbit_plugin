@@ -1,8 +1,8 @@
 module ErrbitPlugin
   class FakeIssueTracker < IssueTracker
-    def label; 'fake'; end
-    def note; 'A fake issue tracker to help in testing purpose'; end
-    def fields
+    def self.label; 'fake'; end
+    def self.note; 'A fake issue tracker to help in testing purpose'; end
+    def self.fields
       {
         :foo => {:label => 'foo'},
         :bar => {:label => 'bar'}

@@ -1,6 +1,5 @@
 module ErrbitPlugin
   class IssueTracker
-
     def initialize(app, params)
       @app = app
       @params = params
@@ -13,8 +12,8 @@ module ErrbitPlugin
       @errors[key] << msg
     end
 
-  def issue_title(problem)
-    "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
-  end
+    def issue_title(problem)
+      "[#{ problem.environment }][#{ problem.where }] #{problem.message.to_s.truncate(100)}"
+    end
   end
 end

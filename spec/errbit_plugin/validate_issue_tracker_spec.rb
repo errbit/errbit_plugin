@@ -5,9 +5,9 @@ describe ErrbitPlugin::ValidateIssueTracker do
 
     context "with a complete class" do
       class Foo < ErrbitPlugin::IssueTracker
-        def label; 'foo'; end
-        def note; 'foo'; end
-        def fields; ['foo']; end
+        def self.label; 'foo'; end
+        def self.note; 'foo'; end
+        def self.fields; ['foo']; end
         def configured?; true; end
         def check_params; true; end
         def create_issue; 'http'; end
@@ -16,16 +16,16 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it 'valid' do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(Foo).valid?).to be_true
+        expect(ErrbitPlugin::ValidateIssueTracker.new(Foo).valid?).to be true
       end
     end
 
     context "with class not inherit from ErrbitPlugin::IssueTracker" do
 
       class Bar
-        def label; 'foo'; end
-        def note; 'foo'; end
-        def fields; ['foo']; end
+        def self.label; 'foo'; end
+        def self.note; 'foo'; end
+        def self.fields; ['foo']; end
         def configured?; true; end
         def check_params; true; end
         def create_issue; 'http'; end
@@ -34,7 +34,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it 'not valid' do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(Bar).valid?).to be_false
+        expect(ErrbitPlugin::ValidateIssueTracker.new(Bar).valid?).to be false
       end
 
       it 'say not implement configured?' do
@@ -56,19 +56,19 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it 'not valid' do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(Baz).valid?).to be_false
+        expect(ErrbitPlugin::ValidateIssueTracker.new(Baz).valid?).to be false
       end
 
       it 'say not implement configured?' do
         is = ErrbitPlugin::ValidateIssueTracker.new(Baz)
         is.valid?
-        expect(is.errors).to eql [[:method_missing, :label]]
+        expect(is.errors).to eql [[:class_method_missing, :label]]
       end
     end
 
     context "without fields method" do
       class BazFields < ErrbitPlugin::IssueTracker
-        def label; 'foo'; end
+        def self.label; 'foo'; end
         def note; 'foo'; end
         def configured?; true; end
         def check_params; true; end
@@ -78,13 +78,13 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it 'not valid' do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(BazFields).valid?).to be_false
+        expect(ErrbitPlugin::ValidateIssueTracker.new(BazFields).valid?).to be false
       end
 
       it 'say not implement configured?' do
         is = ErrbitPlugin::ValidateIssueTracker.new(BazFields)
         is.valid?
-        expect(is.errors).to eql [[:method_missing, :fields]]
+        expect(is.errors).to eql [[:class_method_missing, :fields]]
       end
     end
 
@@ -100,13 +100,13 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it 'not valid' do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(BazConfigured).valid?).to be_false
+        expect(ErrbitPlugin::ValidateIssueTracker.new(BazConfigured).valid?).to be false
       end
 
       it 'say not implement configured?' do
         is = ErrbitPlugin::ValidateIssueTracker.new(BazConfigured)
         is.valid?
-        expect(is.errors).to eql [[:method_missing, :configured?]]
+        expect(is.errors).to eql [[:instance_method_missing, :configured?]]
       end
     end
 
@@ -122,13 +122,13 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it 'not valid' do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(BazCheckParams).valid?).to be_false
+        expect(ErrbitPlugin::ValidateIssueTracker.new(BazCheckParams).valid?).to be false
       end
 
       it 'say not implement check_params' do
         is = ErrbitPlugin::ValidateIssueTracker.new(BazCheckParams)
         is.valid?
-        expect(is.errors).to eql [[:method_missing, :check_params]]
+        expect(is.errors).to eql [[:instance_method_missing, :check_params]]
       end
     end
 
@@ -144,12 +144,12 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it 'not valid' do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(BazCreateIssue).valid?).to be_false
+        expect(ErrbitPlugin::ValidateIssueTracker.new(BazCreateIssue).valid?).to be false
       end
       it 'say not implement url' do
         is = ErrbitPlugin::ValidateIssueTracker.new(BazCreateIssue)
         is.valid?
-        expect(is.errors).to eql [[:method_missing, :create_issue]]
+        expect(is.errors).to eql [[:instance_method_missing, :create_issue]]
       end
     end
 
@@ -165,13 +165,13 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it 'not valid' do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(BazUrl).valid?).to be_false
+        expect(ErrbitPlugin::ValidateIssueTracker.new(BazUrl).valid?).to be false
       end
 
       it 'say not implement url' do
         is = ErrbitPlugin::ValidateIssueTracker.new(BazUrl)
         is.valid?
-        expect(is.errors).to eql [[:method_missing, :url]]
+        expect(is.errors).to eql [[:instance_method_missing, :url]]
       end
     end
 
@@ -187,20 +187,20 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it 'not valid' do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(BazComment).valid?).to be_false
+        expect(ErrbitPlugin::ValidateIssueTracker.new(BazComment).valid?).to be false
       end
 
       it 'say not implement comments_allowed?' do
         is = ErrbitPlugin::ValidateIssueTracker.new(BazComment)
         is.valid?
-        expect(is.errors).to eql [[:method_missing, :comments_allowed?]]
+        expect(is.errors).to eql [[:instance_method_missing, :comments_allowed?]]
       end
     end
 
     context "without note method" do
       class BazNote < ErrbitPlugin::IssueTracker
-        def label; 'foo'; end
-        def fields; ['foo']; end
+        def self.label; 'foo'; end
+        def self.fields; ['foo']; end
         def configured?; true; end
         def check_params; true; end
         def create_issue; 'http'; end
@@ -209,13 +209,13 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it 'not valid' do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(BazNote).valid?).to be_false
+        expect(ErrbitPlugin::ValidateIssueTracker.new(BazNote).valid?).to be false
       end
 
       it 'say not implement comments_allowed?' do
         is = ErrbitPlugin::ValidateIssueTracker.new(BazNote)
         is.valid?
-        expect(is.errors).to eql [[:method_missing, :note]]
+        expect(is.errors).to eql [[:class_method_missing, :note]]
       end
     end
   end
