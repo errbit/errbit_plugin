@@ -6,8 +6,8 @@ require 'errbit_plugin/version'
 Gem::Specification.new do |spec|
   spec.name          = "errbit_plugin"
   spec.version       = ErrbitPlugin::VERSION
-  spec.authors       = ["Cyril Mougel"]
-  spec.email         = ["cyril.mougel@gmail.com"]
+  spec.authors       = ["Stephen Crosby"]
+  spec.email         = ["stevecrozz@gmail.com"]
   spec.description   = %q{Base to create an errbit plugin}
   spec.summary       = %q{Base to create an errbit plugin}
   spec.homepage      = "http://github.com/errbit/errbit"
