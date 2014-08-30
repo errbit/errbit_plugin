@@ -1,27 +1,38 @@
 module ErrbitPlugin
   class FakeIssueTracker < IssueTracker
-    def self.label; 'fake'; end
-    def self.note; 'A fake issue tracker to help in testing purpose'; end
+    def self.label
+      'fake'
+    end
+
+    def self.note
+      'A fake issue tracker to help in testing purpose'
+    end
+
     def self.fields
       {
         :foo => {:label => 'foo'},
         :bar => {:label => 'bar'}
       }
     end
-    ##
-    # The NoneIssueTracker is mark like configured? false because it not valid
-    # like a real IssueTracker
-    def configured?; check_params; end
-    def check_params
-      params[:foo] && params[:bar]
+
+    def configured?
+      errors.any?
     end
+
+    def errors
+      errors = {}
+      errors[:foo] = 'foo is required' unless params[:foo]
+      errors[:bar] = 'bar is required' unless params[:bar]
+
+      errors
+    end
+
     def create_issue; true; end
+
     def url; ''; end
+
     def comments_allowed?; false; end
   end
 end
 
-ErrbitPlugin::Register.add_issue_tracker(
-  'fake',
-  ErrbitPlugin::FakeIssueTracker
-)
+ErrbitPlugin::Registry.add_issue_tracker(ErrbitPlugin::FakeIssueTracker)
