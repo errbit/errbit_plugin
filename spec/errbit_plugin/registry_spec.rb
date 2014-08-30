@@ -1,30 +1,39 @@
 require 'spec_helper'
 
-describe ErrbitPlugin::Register do
+describe ErrbitPlugin::Registry do
   before do
-    ErrbitPlugin::Register.clear
+    ErrbitPlugin::Registry.clear_issue_trackers
   end
+
+  let(:tracker) {
+    tracker = Class.new(ErrbitPlugin::IssueTracker) do
+      def self.label
+        'something'
+      end
+    end
+    tracker
+  }
 
   describe ".add_issue_tracker" do
     context "with issue_tracker class valid" do
       before do
         allow(ErrbitPlugin::ValidateIssueTracker)
           .to receive(:new)
-          .with(ErrbitPlugin::IssueTracker)
+          .with(tracker)
           .and_return(double(:valid? => true, :message => ''))
       end
       it 'add new issue_tracker plugin' do
-        ErrbitPlugin::Register.add_issue_tracker('foo', ErrbitPlugin::IssueTracker)
-        expect(ErrbitPlugin::Register.issue_trackers).to eq({
-          'foo' => ErrbitPlugin::IssueTracker
+        ErrbitPlugin::Registry.add_issue_tracker(tracker)
+        expect(ErrbitPlugin::Registry.issue_trackers).to eq({
+          'something' => tracker
         })
       end
       context "with already issue_tracker with this key" do
-        it 'raise ErrbitPlugin::IncompatibilityError' do
-          ErrbitPlugin::Register.add_issue_tracker('foo', ErrbitPlugin::IssueTracker)
+        it 'raise ErrbitPlugin::AlreadyRegisteredError' do
+          ErrbitPlugin::Registry.add_issue_tracker(tracker)
           expect {
-            ErrbitPlugin::Register.add_issue_tracker('foo', ErrbitPlugin::IssueTracker)
-          }.to raise_error(ErrbitPlugin::IncompatibilityError)
+            ErrbitPlugin::Registry.add_issue_tracker(tracker)
+          }.to raise_error(ErrbitPlugin::AlreadyRegisteredError)
         end
       end
     end
@@ -33,21 +42,21 @@ describe ErrbitPlugin::Register do
       it 'raise an IncompatibilityError' do
         allow(ErrbitPlugin::ValidateIssueTracker)
           .to receive(:new)
-          .with(ErrbitPlugin::IssueTracker)
+          .with(tracker)
           .and_return(double(:valid? => false, :message => 'foo', :errors => []))
         expect {
-          ErrbitPlugin::Register.add_issue_tracker('foo', ErrbitPlugin::IssueTracker)
+          ErrbitPlugin::Registry.add_issue_tracker(tracker)
         }.to raise_error(ErrbitPlugin::IncompatibilityError)
       end
 
       it 'puts the errors in the exception message' do
         allow(ErrbitPlugin::ValidateIssueTracker)
           .to receive(:new)
-          .with(ErrbitPlugin::IssueTracker)
+          .with(tracker)
           .and_return(double(:valid? => false, :message => 'foo', :errors => ['one', 'two']))
 
         begin
-          ErrbitPlugin::Register.add_issue_tracker('foo', ErrbitPlugin::IssueTracker)
+          ErrbitPlugin::Registry.add_issue_tracker(tracker)
         rescue ErrbitPlugin::IncompatibilityError => e
           expect(e.message).to eq('one; two')
         end

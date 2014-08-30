@@ -9,7 +9,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def self.note; 'foo'; end
         def self.fields; ['foo']; end
         def configured?; true; end
-        def check_params; true; end
+        def errors; true; end
         def create_issue; 'http'; end
         def url; 'http'; end
         def comments_allowed?; false; end
@@ -27,7 +27,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def self.note; 'foo'; end
         def self.fields; ['foo']; end
         def configured?; true; end
-        def check_params; true; end
+        def errors; true; end
         def create_issue; 'http'; end
         def url; 'http'; end
         def comments_allowed?; false; end
@@ -49,7 +49,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def note; 'foo'; end
         def fields; ['foo']; end
         def configured?; true; end
-        def check_params; true; end
+        def errors; true; end
         def create_issue; 'http'; end
         def url; 'http'; end
         def comments_allowed?; false; end
@@ -71,7 +71,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def self.label; 'foo'; end
         def note; 'foo'; end
         def configured?; true; end
-        def check_params; true; end
+        def errors; true; end
         def create_issue; 'http'; end
         def url; 'http'; end
         def comments_allowed?; false; end
@@ -93,7 +93,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def label; 'foo'; end
         def note; 'foo'; end
         def fields; ['foo']; end
-        def check_params; true; end
+        def errors; true; end
         def create_issue; 'http'; end
         def url; 'http'; end
         def comments_allowed?; false; end
@@ -110,7 +110,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
     end
 
-    context "without check_params method" do
+    context "without errors method" do
       class BazCheckParams < ErrbitPlugin::IssueTracker
         def label; 'foo'; end
         def note; 'foo'; end
@@ -125,10 +125,10 @@ describe ErrbitPlugin::ValidateIssueTracker do
         expect(ErrbitPlugin::ValidateIssueTracker.new(BazCheckParams).valid?).to be false
       end
 
-      it 'say not implement check_params' do
+      it 'say not implement errors' do
         is = ErrbitPlugin::ValidateIssueTracker.new(BazCheckParams)
         is.valid?
-        expect(is.errors).to eql [[:instance_method_missing, :check_params]]
+        expect(is.errors).to eql [[:instance_method_missing, :errors]]
       end
     end
 
@@ -138,7 +138,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def note; 'foo'; end
         def fields; ['foo']; end
         def configured?; true; end
-        def check_params; true; end
+        def errors; true; end
         def url; 'http'; end
         def comments_allowed?; false; end
       end
@@ -159,7 +159,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def note; 'foo'; end
         def fields; ['foo']; end
         def configured?; true; end
-        def check_params; true; end
+        def errors; true; end
         def create_issue; 'http'; end
         def comments_allowed?; false; end
       end
@@ -181,7 +181,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def note; 'foo'; end
         def fields; ['foo']; end
         def configured?; true; end
-        def check_params; true; end
+        def errors; true; end
         def create_issue; 'http'; end
         def url; 'foo'; end
       end
@@ -202,7 +202,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def self.label; 'foo'; end
         def self.fields; ['foo']; end
         def configured?; true; end
-        def check_params; true; end
+        def errors; true; end
         def create_issue; 'http'; end
         def url; 'foo'; end
         def comments_allowed?; false; end
