@@ -16,7 +16,7 @@ module ErrbitPlugin
     end
 
     def configured?
-      errors.any?
+      !errors.any?
     end
 
     def errors
@@ -27,7 +27,7 @@ module ErrbitPlugin
       errors
     end
 
-    def create_issue; true; end
+    def create_issue(problem, reported_by=nil); true; end
 
     def url; ''; end
 
