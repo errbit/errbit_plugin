@@ -1,4 +1,5 @@
 # ErrbitPlugin
+[![Build Status](https://travis-ci.org/errbit/errbit_plugin.svg?branch=master)](https://travis-ci.org/errbit/errbit_plugin)
 ErrbitPlugin provides a set of base classes that you can extend to create
 Errbit plugins.
 
