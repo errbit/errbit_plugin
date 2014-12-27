@@ -30,8 +30,6 @@ module ErrbitPlugin
     def create_issue(problem, reported_by=nil); true; end
 
     def url; ''; end
-
-    def comments_allowed?; false; end
   end
 end
 

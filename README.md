@@ -77,12 +77,6 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   def url
     'http://some-remote-tracker.com'
   end
-
-  # If you return false here, errbit will not show the built-in error comment
-  # interface
-  def comments_allowed?
-    false
-  end
 end
 ```
 

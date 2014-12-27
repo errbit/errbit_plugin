@@ -13,7 +13,6 @@ module ErrbitPlugin
     def errors; {}; end
     def create_issue; true; end
     def url; ''; end
-    def comments_allowed?; true; end
   end
 end
 

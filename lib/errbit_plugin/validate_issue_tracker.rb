@@ -24,7 +24,7 @@ module ErrbitPlugin
     end
 
     def implements_instance_methods?
-      [:comments_allowed?, :configured?, :errors, :create_issue, :url].all? do |method|
+      [:configured?, :errors, :create_issue, :url].all? do |method|
         if instance.respond_to?(method)
           true
         else

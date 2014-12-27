@@ -12,7 +12,6 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def errors; true; end
         def create_issue; 'http'; end
         def url; 'http'; end
-        def comments_allowed?; false; end
       end
 
       it 'valid' do
@@ -30,7 +29,6 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def errors; true; end
         def create_issue; 'http'; end
         def url; 'http'; end
-        def comments_allowed?; false; end
       end
 
       it 'not valid' do
@@ -52,7 +50,6 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def errors; true; end
         def create_issue; 'http'; end
         def url; 'http'; end
-        def comments_allowed?; false; end
       end
 
       it 'not valid' do
@@ -74,7 +71,6 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def errors; true; end
         def create_issue; 'http'; end
         def url; 'http'; end
-        def comments_allowed?; false; end
       end
 
       it 'not valid' do
@@ -96,7 +92,6 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def errors; true; end
         def create_issue; 'http'; end
         def url; 'http'; end
-        def comments_allowed?; false; end
       end
 
       it 'not valid' do
@@ -118,7 +113,6 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def configured?; true; end
         def create_issue; 'http'; end
         def url; 'http'; end
-        def comments_allowed?; false; end
       end
 
       it 'not valid' do
@@ -140,7 +134,6 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def configured?; true; end
         def errors; true; end
         def url; 'http'; end
-        def comments_allowed?; false; end
       end
 
       it 'not valid' do
@@ -161,7 +154,6 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def configured?; true; end
         def errors; true; end
         def create_issue; 'http'; end
-        def comments_allowed?; false; end
       end
 
       it 'not valid' do
@@ -175,28 +167,6 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
     end
 
-    context "without comments_allowed? method" do
-      class BazComment < ErrbitPlugin::IssueTracker
-        def label; 'foo'; end
-        def note; 'foo'; end
-        def fields; ['foo']; end
-        def configured?; true; end
-        def errors; true; end
-        def create_issue; 'http'; end
-        def url; 'foo'; end
-      end
-
-      it 'not valid' do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(BazComment).valid?).to be false
-      end
-
-      it 'say not implement comments_allowed?' do
-        is = ErrbitPlugin::ValidateIssueTracker.new(BazComment)
-        is.valid?
-        expect(is.errors).to eql [[:instance_method_missing, :comments_allowed?]]
-      end
-    end
-
     context "without note method" do
       class BazNote < ErrbitPlugin::IssueTracker
         def self.label; 'foo'; end
@@ -205,14 +175,13 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def errors; true; end
         def create_issue; 'http'; end
         def url; 'foo'; end
-        def comments_allowed?; false; end
       end
 
       it 'not valid' do
         expect(ErrbitPlugin::ValidateIssueTracker.new(BazNote).valid?).to be false
       end
 
-      it 'say not implement comments_allowed?' do
+      it 'say not implement note method' do
         is = ErrbitPlugin::ValidateIssueTracker.new(BazNote)
         is.valid?
         expect(is.errors).to eql [[:class_method_missing, :note]]
