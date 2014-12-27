@@ -11,8 +11,8 @@ module ErrbitPlugin
     # like a real IssueTracker
     def configured?; false; end
     def errors; {}; end
-    def create_issue; true; end
     def url; ''; end
+    def create_issue(*); true; end
   end
 end
 

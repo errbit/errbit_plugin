@@ -1,10 +1,9 @@
 module ErrbitPlugin
   class IssueTracker
-    attr_reader :app, :params
+    attr_reader :options
 
-    def initialize(app, params)
-      @app = app
-      @params = params
+    def initialize(options)
+      @options = options
     end
 
     def pretty_hash(hash, nesting = 0)

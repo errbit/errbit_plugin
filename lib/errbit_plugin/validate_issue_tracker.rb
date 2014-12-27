@@ -46,7 +46,7 @@ module ErrbitPlugin
     end
 
     def instance
-      @instance ||= @klass.new(Object.new, {})
+      @instance ||= @klass.new({})
     end
 
     def add_errors(key, value=nil)
