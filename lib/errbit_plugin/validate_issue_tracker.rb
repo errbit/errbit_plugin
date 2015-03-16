@@ -35,7 +35,7 @@ module ErrbitPlugin
     end
 
     def implements_class_methods?
-      [:label, :fields, :note].all? do |method|
+      [:label, :fields, :note, :icons].all? do |method|
         if @klass.respond_to?(method)
           true
         else
