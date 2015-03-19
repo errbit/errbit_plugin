@@ -7,9 +7,11 @@ module ErrbitPlugin
     attr_reader :errors
 
     def valid?
-      good_inherit? &&
-        implements_instance_methods? &&
-        implements_class_methods?
+      valid_inherit = good_inherit?
+      valid_instance_methods = implements_instance_methods?
+      valid_class_methods = implements_class_methods?
+
+      valid_inherit && valid_instance_methods && valid_class_methods
     end
 
     private
@@ -24,7 +26,7 @@ module ErrbitPlugin
     end
 
     def implements_instance_methods?
-      [:configured?, :errors, :create_issue, :url].all? do |method|
+      impl = [:configured?, :errors, :create_issue, :url].map do |method|
         if instance.respond_to?(method)
           true
         else
@@ -32,10 +34,12 @@ module ErrbitPlugin
           false
         end
       end
+
+      impl.all? { |value| value == true }
     end
 
     def implements_class_methods?
-      [:label, :fields, :note].all? do |method|
+      impl = [:label, :fields, :note, :icons].map do |method|
         if @klass.respond_to?(method)
           true
         else
@@ -43,6 +47,8 @@ module ErrbitPlugin
           false
         end
       end
+
+      impl.all? { |value| value == true }
     end
 
     def instance
