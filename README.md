@@ -38,22 +38,38 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   # later when we have an instance of this class.
   def self.fields
     {
-      :field_one => {:label => 'Field One'},
-      :field_two => {:label => 'Field Two'}
+      username: {
+        placeholder: "Some placeholder text"
+      },
+      password: {
+        placeholder: "Some more placeholder text"
+      }
+    }
+  end
+
+  # Icons to display during user interactions with this issue tracker. This
+  # method should return a hash of two-tuples, the key names being 'create',
+  # 'goto', and 'inactive'. The two-tuples should contain the icon media type
+  # and the binary icon data.
+  def self.icons
+    @icons ||= {
+      create: [ 'image/png', File.read('./path/to/create.png') ],
+      goto: [ 'image/png', File.read('./path/to/goto.png') ],
+      inactive: [ 'image/png', File.read('./path/to/inactive.png') ],
     }
   end
 
   # If this tracker can be in a configured or non-configured state, you can let
   # errbit know by returning a Boolean here
   def configured?
-    # In this case, we'll say this issue tracker is configured when field_one
+    # In this case, we'll say this issue tracker is configured when username
     # is set
-    !!params['field_one']
+    !!params['username']
   end
 
   # Called to validate user input. Just return a hash of errors if there are
   # any
-  def check_params
+  def errors
     if @params['field_one']
       {}
     else
@@ -82,8 +98,5 @@ end
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Discuss any changes you'd like to make with the authors on the mailing list, or
+by opening a github issue.
