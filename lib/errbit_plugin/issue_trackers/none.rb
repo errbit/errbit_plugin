@@ -23,7 +23,8 @@ module ErrbitPlugin
     def configured?; false; end
     def errors; {}; end
     def url; ''; end
-    def create_issue(*); true; end
+    def create_issue(*); false; end
+    def close_issue(*); false; end
   end
 end
 

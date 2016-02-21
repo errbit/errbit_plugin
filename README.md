@@ -16,7 +16,9 @@ errbit to an issue in an external issue tracker like Github. An app within
 errbit can be associated an issue tracker or not. When there is an association,
 errbit users can choose 'create issue' from an error page which will both
 create an issue on the external issue tracker out of the given error and link
-that issue to the errbit error.
+that issue to the errbit error. Likewise, a user can also choose 'close issue'
+to close the issue on the external issue tracker, if your plugin provides a 
+method to do so.
 
 Your issue tracker plugin is responsible for providing the interface defined by
 ErrbitPlugin::IssueTracker. All of the required methods must be implemented and
@@ -89,12 +91,21 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
     )
   end
 
+  # This method is optional, and is where you actually go close the issue on
+  # the external issue tracker. You get access to everything in params, a problem
+  # resource and a user resource.
+  def close_issue(issue_link)
+    # Close the issue! (Perhaps using the passed in issue_link url to identify it.)
+  end
+
   # The URL for your remote issue tracker
   def url
     'http://some-remote-tracker.com'
   end
 end
 ```
+
+
 
 ## Contributing
 
