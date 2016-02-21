@@ -4,8 +4,15 @@ module ErrbitPlugin
 
   module Registry
     @issue_trackers = {}
+    @notifiers = {}
 
     def self.add_issue_tracker(klass)
+      validate = ValidateIssueTracker.new(klass)
+
+      unless validate.valid?
+        raise IncompatibilityError.new(validate.errors.join('; '))
+      end
+
       key = klass.label
 
       if issue_trackers.has_key?(key)
@@ -13,21 +20,40 @@ module ErrbitPlugin
           "issue_tracker '#{key}' already registered"
       end
 
-      validate = ValidateIssueTracker.new(klass)
-
-      if validate.valid?
-        @issue_trackers[key] = klass
-      else
-        raise IncompatibilityError.new(validate.errors.join('; '))
-      end
+      @issue_trackers[key] = klass
     end
 
     def self.clear_issue_trackers
-      @issue_trackers = {}
+      @issue_trackers.clear
     end
 
     def self.issue_trackers
       @issue_trackers
+    end
+
+    def self.add_notifier(klass)
+      validate = ValidateNotifier.new(klass)
+
+      unless validate.valid?
+        raise IncompatibilityError.new(validate.errors.join('; '))
+      end
+
+      key = klass.label
+
+      if notifiers.has_key?(key)
+        raise AlreadyRegisteredError,
+          "notifier '#{key}' already registered"
+      end
+
+      @notifiers[key] = klass
+    end
+
+    def self.clear_notifiers
+      @notifiers.clear
+    end
+
+    def self.notifiers
+      @notifiers
     end
   end
 end

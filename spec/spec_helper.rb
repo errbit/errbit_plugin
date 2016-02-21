@@ -13,6 +13,7 @@ if ENV['COVERAGE']
 end
 
 require 'errbit_plugin'
+require 'pry'
 
 RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
