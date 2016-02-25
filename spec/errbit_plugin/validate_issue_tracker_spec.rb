@@ -12,6 +12,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def configured?; true; end
         def errors; true; end
         def create_issue; 'http'; end
+        def close_issue; 'http'; end
         def url; 'http'; end
       end
 
@@ -30,6 +31,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def configured?; true; end
         def errors; true; end
         def create_issue; 'http'; end
+        def close_issue; 'http'; end
         def url; 'http'; end
       end
 
@@ -52,6 +54,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def configured?; true; end
         def errors; true; end
         def create_issue; 'http'; end
+        def close_issue; 'http'; end
         def url; 'http'; end
       end
 
@@ -59,7 +62,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
       end
 
-      it 'say not implement configured?' do
+      it 'say not implement label method' do
         is = ErrbitPlugin::ValidateIssueTracker.new(klass)
         is.valid?
         expect(is.errors).to eql [[:class_method_missing, :label]]
@@ -74,6 +77,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def configured?; true; end
         def errors; true; end
         def create_issue; 'http'; end
+        def close_issue; 'http'; end
         def url; 'http'; end
       end
 
@@ -81,7 +85,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
       end
 
-      it 'say not implement configured?' do
+      it 'say not implement icons method' do
         is = ErrbitPlugin::ValidateIssueTracker.new(klass)
         is.valid?
         expect(is.errors).to eql [[:class_method_missing, :icons]]
@@ -96,6 +100,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def configured?; true; end
         def errors; true; end
         def create_issue; 'http'; end
+        def close_issue; 'http'; end
         def url; 'http'; end
       end
 
@@ -103,7 +108,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
       end
 
-      it 'say not implement configured?' do
+      it 'say not implement fields method' do
         is = ErrbitPlugin::ValidateIssueTracker.new(klass)
         is.valid?
         expect(is.errors).to eql [[:class_method_missing, :fields]]
@@ -118,6 +123,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def self.icons; {}; end
         def errors; true; end
         def create_issue; 'http'; end
+        def close_issue; 'http'; end
         def url; 'http'; end
       end
 
@@ -125,7 +131,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
       end
 
-      it 'say not implement configured?' do
+      it 'say not implement configured? method' do
         is = ErrbitPlugin::ValidateIssueTracker.new(klass)
         is.valid?
         expect(is.errors).to eql [[:instance_method_missing, :configured?]]
@@ -140,6 +146,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def self.icons; {}; end
         def configured?; true; end
         def create_issue; 'http'; end
+        def close_issue; 'http'; end
         def url; 'http'; end
       end
 
@@ -147,7 +154,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
       end
 
-      it 'say not implement errors' do
+      it 'say not implement errors method' do
         is = ErrbitPlugin::ValidateIssueTracker.new(klass)
         is.valid?
         expect(is.errors).to eql [[:instance_method_missing, :errors]]
@@ -162,16 +169,40 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def self.icons; {}; end
         def configured?; true; end
         def errors; true; end
+        def close_issue; 'http'; end
         def url; 'http'; end
       end
 
       it 'not valid' do
         expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
       end
-      it 'say not implement url' do
+      it 'say not implement create_issue method' do
         is = ErrbitPlugin::ValidateIssueTracker.new(klass)
         is.valid?
         expect(is.errors).to eql [[:instance_method_missing, :create_issue]]
+      end
+    end
+
+    context "without close_issue method" do
+      # this is an optional method
+      klass = Class.new(ErrbitPlugin::IssueTracker) do
+        def self.label; 'foo'; end
+        def self.note; 'foo'; end
+        def self.fields; ['foo']; end
+        def self.icons; {}; end
+        def configured?; true; end
+        def errors; true; end
+        def create_issue; 'http'; end
+        def url; 'http'; end
+      end
+
+      it 'is valid' do
+        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be true
+      end
+      it 'not say not implement close_issue method' do
+        is = ErrbitPlugin::ValidateIssueTracker.new(klass)
+        is.valid?
+        expect(is.errors).not_to eql [[:instance_method_missing, :close_issue]]
       end
     end
 
@@ -184,13 +215,14 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def configured?; true; end
         def errors; true; end
         def create_issue; 'http'; end
+        def close_issue; 'http'; end
       end
 
       it 'not valid' do
         expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
       end
 
-      it 'say not implement url' do
+      it 'say not implement url method' do
         is = ErrbitPlugin::ValidateIssueTracker.new(klass)
         is.valid?
         expect(is.errors).to eql [[:instance_method_missing, :url]]
@@ -205,6 +237,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
         def configured?; true; end
         def errors; true; end
         def create_issue; 'http'; end
+        def close_issue; 'http'; end
         def url; 'foo'; end
       end
 
