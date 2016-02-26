@@ -44,7 +44,8 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
         placeholder: "Some placeholder text"
       },
       password: {
-        placeholder: "Some more placeholder text"
+        placeholder: "Some more placeholder text",
+        label: "Passphrase" # a label to use in the UI instead of 'password'
       }
     }
   end
@@ -65,36 +66,37 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   # errbit know by returning a Boolean here
   def configured?
     # In this case, we'll say this issue tracker is configured when username
-    # is set
-    !!params['username']
+    # and password are set
+    options[:username].present? && options[:password].present?
   end
 
   # Called to validate user input. Just return a hash of errors if there are
   # any
   def errors
-    if @params['field_one']
+    if options[:username]
       {}
     else
-      { :field_one, 'Field One must be present' }
+      { field_one: 'username must be present' }
     end
   end
 
   # This is where you actually go create the issue on the external issue
-  # tracker. You get access to everything in params, a problem resource and a
-  # user resource (reported_by). Once you've created an external issue, save
-  # its type and url on the problem resource.
-  def create_issue(problem, reported_by = nil)
+  # tracker. You get access to everything in options, an issue title, body and
+  # a user record representing the user who's creating the issue.
+  #
+  # Return a string with a link to the issue
+  def create_issue(title, body, user: {})
     # Create an issue! Then update the problem to link it.
-    problem.update_attributes(
-      :issue_type => 'bug',
-      :issue_link => 'http://some-remote-tracker.com/mynewissue'
-    )
+
+    'http://sometracker.com/my/issue/123'
   end
 
   # This method is optional, and is where you actually go close the issue on
-  # the external issue tracker. You get access to everything in params, a problem
-  # resource and a user resource.
-  def close_issue(issue_link)
+  # the external issue tracker. You get access to everything in options, a
+  # string with a link to the issue # and a user resource.
+  #
+  # return true if successful, false otherwise
+  def close_issue(issue_link, user = {})
     # Close the issue! (Perhaps using the passed in issue_link url to identify it.)
   end
 
