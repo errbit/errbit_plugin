@@ -91,6 +91,21 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
     'http://sometracker.com/my/issue/123'
   end
 
+  # This method is optional. Errbit will create body text for your issue by
+  # calling render_to_string with some arguments. If you want control over
+  # those arguments, you can specify them here. You can control which file is
+  # rendered and anything else Rails allows you to specify as arguments in
+  # render_to_string.
+  #
+  # If you don't implement this method, Errbit will render a body using a
+  # default template
+  #
+  # @see http://apidock.com/rails/ActionController/Base/render_to_string
+  def render_body_args
+    # In this example, we want to render a special file
+    ['/path/to/some/template', formats: [:rdoc]]
+  end
+
   # This method is optional, and is where you actually go close the issue on
   # the external issue tracker. You get access to everything in options, a
   # string with a link to the issue # and a user resource.
