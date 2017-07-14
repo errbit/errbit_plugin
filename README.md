@@ -7,8 +7,8 @@ ErrbitPlugins are Ruby gems that extend the functionality of Errbit. To get
 started, create a Ruby gem and add 'errbit_plugin' as a dependency in your
 gem's gemspec.
 
-Now you can start adding plugins. At the moment, there is only one kind of
-plugin you can create, and that is the issue tracker.
+Now you can start adding plugins. Keep reading to learn about what you can do
+with Errbit plugins.
 
 ### Issue Trackers
 An issue tracker plugin is a Ruby class that enables you to link errors within
@@ -122,7 +122,86 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
 end
 ```
 
+### Notifiers
+A Notifier is a Ruby class that can notify an external system when Errbit
+receives notices. When configuring an app within the Errbit UI, you can choose
+to enable a notifier which will delegate the business of sending notifications
+to the selected notifier.
 
+Your notifier plugin is responsible for implementing the interface defined by
+ErrbitPlugin::Notifier. All of the required methods must be implemented and the
+class must extend ErrbitPlugin::Notifier. Here's an example:
+```ruby
+class MyNotifier < ErrbitPlugin::Notifier
+
+  # A unique label for your notifier plugin used internally by errbit
+  def self.label
+    'my-notifier'
+  end
+
+  def self.note
+    'a note about this notifier that users will see in the UI'
+  end
+
+  # Form fields that will be presented to the administrator when setting up
+  # or editing the errbit app. The values we collect will be availble for use
+  # later when its time to notify.
+  def self.fields
+    {
+      username: {
+        placeholder: "Some placeholder text"
+      },
+      password: {
+        placeholder: "Some more placeholder text"
+      }
+    }
+  end
+
+  # Icons to display during user interactions with this notifier. This method
+  # should return a hash of two-tuples, the key names being 'create', 'goto',
+  # and 'inactive'. The two-tuples should contain the icon media type and the
+  # binary icon data.
+  def self.icons
+    @icons ||= {
+      create: [ 'image/png', File.read('./path/to/create.png') ],
+      goto: [ 'image/png', File.read('./path/to/goto.png') ],
+      inactive: [ 'image/png', File.read('./path/to/inactive.png') ],
+    }
+  end
+
+  # If this notifier can be in a configured or non-configured state, you can let
+  # errbit know by returning a Boolean here
+  def configured?
+    # In this case, we'll say this notifier is configured when username
+    # is set
+    !!params['username']
+  end
+
+  # Called to validate user input. Just return a hash of errors if there are
+  # any
+  def errors
+    if @params['field_one']
+      {}
+    else
+      { :field_one, 'Field One must be present' }
+    end
+  end
+
+  # notify is called when Errbit decides its time to notify external systems
+  # about a new error notice. notify receives an instance of the notice's problem
+  # which you can interrogate for any information you'd like to include in the
+  # notification message.
+  def notify(problem)
+    # Send a notification! Use HTTP, SMTP, FTP, RabbitMQ or whatever you want
+    # to notify your external system.
+  end
+
+  # The URL for your remote issue tracker
+  def url
+    'http://some-remote-tracker.com'
+  end
+end
+```
 
 ## Contributing
 

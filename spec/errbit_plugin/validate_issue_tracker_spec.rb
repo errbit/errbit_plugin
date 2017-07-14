@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ErrbitPlugin::ValidateIssueTracker do
   describe "#valid?" do
 
