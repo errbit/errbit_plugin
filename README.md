@@ -16,7 +16,9 @@ errbit to an issue in an external issue tracker like Github. An app within
 errbit can be associated an issue tracker or not. When there is an association,
 errbit users can choose 'create issue' from an error page which will both
 create an issue on the external issue tracker out of the given error and link
-that issue to the errbit error.
+that issue to the errbit error. Likewise, a user can also choose 'close issue'
+to close the issue on the external issue tracker, if your plugin provides a 
+method to do so.
 
 Your issue tracker plugin is responsible for providing the interface defined by
 ErrbitPlugin::IssueTracker. All of the required methods must be implemented and
@@ -42,7 +44,8 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
         placeholder: "Some placeholder text"
       },
       password: {
-        placeholder: "Some more placeholder text"
+        placeholder: "Some more placeholder text",
+        label: "Passphrase" # a label to use in the UI instead of 'password'
       }
     }
   end
@@ -63,30 +66,53 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   # errbit know by returning a Boolean here
   def configured?
     # In this case, we'll say this issue tracker is configured when username
-    # is set
-    !!params['username']
+    # and password are set
+    options[:username].present? && options[:password].present?
   end
 
   # Called to validate user input. Just return a hash of errors if there are
   # any
   def errors
-    if @params['field_one']
+    if options[:username]
       {}
     else
-      { :field_one, 'Field One must be present' }
+      { field_one: 'username must be present' }
     end
   end
 
   # This is where you actually go create the issue on the external issue
-  # tracker. You get access to everything in params, a problem resource and a
-  # user resource (reported_by). Once you've created an external issue, save
-  # its type and url on the problem resource.
-  def create_issue(problem, reported_by = nil)
+  # tracker. You get access to everything in options, an issue title, body and
+  # a user record representing the user who's creating the issue.
+  #
+  # Return a string with a link to the issue
+  def create_issue(title, body, user: {})
     # Create an issue! Then update the problem to link it.
-    problem.update_attributes(
-      :issue_type => 'bug',
-      :issue_link => 'http://some-remote-tracker.com/mynewissue'
-    )
+
+    'http://sometracker.com/my/issue/123'
+  end
+
+  # This method is optional. Errbit will create body text for your issue by
+  # calling render_to_string with some arguments. If you want control over
+  # those arguments, you can specify them here. You can control which file is
+  # rendered and anything else Rails allows you to specify as arguments in
+  # render_to_string.
+  #
+  # If you don't implement this method, Errbit will render a body using a
+  # default template
+  #
+  # @see http://apidock.com/rails/ActionController/Base/render_to_string
+  def render_body_args
+    # In this example, we want to render a special file
+    ['/path/to/some/template', formats: [:rdoc]]
+  end
+
+  # This method is optional, and is where you actually go close the issue on
+  # the external issue tracker. You get access to everything in options, a
+  # string with a link to the issue # and a user resource.
+  #
+  # return true if successful, false otherwise
+  def close_issue(issue_link, user = {})
+    # Close the issue! (Perhaps using the passed in issue_link url to identify it.)
   end
 
   # The URL for your remote issue tracker
