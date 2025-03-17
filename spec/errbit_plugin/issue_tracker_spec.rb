@@ -40,4 +40,28 @@ RSpec.describe ErrbitPlugin::IssueTracker do
 
     it { expect { subject.url }.to raise_error(NoMethodError, message) }
   end
+
+  describe ".label" do
+    let(:message) { "The ErrbitPlugin::IssueTracker.label method is abstract, an implementation of it must be provided in the subclass" }
+
+    it { expect { described_class.label }.to raise_error(NoMethodError, message) }
+  end
+
+  describe ".note" do
+    let(:message) { "The ErrbitPlugin::IssueTracker.note method is abstract, an implementation of it must be provided in the subclass" }
+
+    it { expect { described_class.note }.to raise_error(NoMethodError, message) }
+  end
+
+  describe ".fields" do
+    let(:message) { "The ErrbitPlugin::IssueTracker.fields method is abstract, an implementation of it must be provided in the subclass" }
+
+    it { expect { described_class.fields }.to raise_error(NoMethodError, message) }
+  end
+
+  describe ".icons" do
+    let(:message) { "The ErrbitPlugin::IssueTracker.icons method is abstract, an implementation of it must be provided in the subclass" }
+
+    it { expect { described_class.icons }.to raise_error(NoMethodError, message) }
+  end
 end
