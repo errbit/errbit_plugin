@@ -369,6 +369,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
       it "not valid" do
         expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
       end
+
       it "say not implement create_issue method" do
         is = ErrbitPlugin::ValidateIssueTracker.new(klass)
         is.valid?
@@ -379,19 +380,43 @@ describe ErrbitPlugin::ValidateIssueTracker do
     context "without close_issue method" do
       # this is an optional method
       klass = Class.new(ErrbitPlugin::IssueTracker) do
-        def self.label; "foo"; end
-        def self.note; "foo"; end
-        def self.fields; ["foo"]; end
-        def self.icons; {}; end
-        def configured?; true; end
-        def errors; true; end
-        def create_issue; "http"; end
-        def url; "http"; end
+        def self.label
+          "foo"
+        end
+
+        def self.note
+          "foo"
+        end
+
+        def self.fields
+          ["foo"]
+        end
+
+        def self.icons
+          {}
+        end
+
+        def configured?
+          true
+        end
+
+        def errors
+          true
+        end
+
+        def create_issue
+          "http"
+        end
+
+        def url
+          "http"
+        end
       end
 
       it "is valid" do
         expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be true
       end
+
       it "not say not implement close_issue method" do
         is = ErrbitPlugin::ValidateIssueTracker.new(klass)
         is.valid?
@@ -402,12 +427,19 @@ describe ErrbitPlugin::ValidateIssueTracker do
     context "without url method" do
       klass = Class.new(ErrbitPlugin::IssueTracker) do
         def self.label; "foo"; end
+
         def self.note; "foo"; end
+
         def self.fields; ["foo"]; end
+
         def self.icons; {}; end
+
         def configured?; true; end
+
         def errors; true; end
+
         def create_issue; "http"; end
+
         def close_issue; "http"; end
       end
 
