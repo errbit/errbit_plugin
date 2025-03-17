@@ -2,6 +2,7 @@
 
 module ErrbitPlugin
   class IncompatibilityError < StandardError; end
+
   class AlreadyRegisteredError < StandardError; end
 
   module Registry

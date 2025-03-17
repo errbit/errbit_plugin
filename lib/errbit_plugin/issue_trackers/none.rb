@@ -18,7 +18,7 @@ module ErrbitPlugin
       @icons ||= {
         create: ["image/png", read_static_file("none_create.png")],
         goto: ["image/png", read_static_file("none_create.png")],
-        inactive: ["image/png", read_static_file("none_inactive.png")],
+        inactive: ["image/png", read_static_file("none_inactive.png")]
       }
     end
 

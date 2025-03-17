@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Stephen Crosby"]
   spec.email = ["stevecrozz@gmail.com"]
 
-  spec.description = %q{Base to create an errbit plugin}
-  spec.summary = %q{Base to create an errbit plugin}
+  spec.description = "Base to create an Errbit plugin"
+  spec.summary = "Base to create an Errbit plugin"
   spec.homepage = "https://github.com/errbit/errbit_plugin"
   spec.license = "MIT"
 
