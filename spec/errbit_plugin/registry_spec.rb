@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe ErrbitPlugin::Registry do
+RSpec.describe ErrbitPlugin::Registry do
   before do
     ErrbitPlugin::Registry.clear_issue_trackers
   end

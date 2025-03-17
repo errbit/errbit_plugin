@@ -8,4 +8,4 @@ gemspec
 gem "rake"
 gem "rspec"
 gem "standard"
-gem "coveralls", require: false
+gem "simplecov", require: false
