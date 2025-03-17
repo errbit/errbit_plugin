@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ErrbitPlugin
   # abstract class for issue trackers
   class IssueTracker
