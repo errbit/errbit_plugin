@@ -128,4 +128,4 @@ end
 ## Contributing
 
 Discuss any changes you'd like to make with the authors on the mailing list, or
-by opening a github issue.
+by opening a GitHub issue.
