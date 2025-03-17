@@ -15,7 +15,7 @@ plugin you can create, and that is the issue tracker.
 ### Issue Trackers
 
 An issue tracker plugin is a Ruby class that enables you to link errors within
-errbit to an issue in an external issue tracker like Github. An app within
+errbit to an issue in an external issue tracker like GitHub. An app within
 errbit can be associated an issue tracker or not. When there is an association,
 errbit users can choose 'create issue' from an error page which will both
 create an issue on the external issue tracker out of the given error and link
