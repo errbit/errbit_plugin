@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe ErrbitPlugin::ValidateIssueTracker do
+RSpec.describe ErrbitPlugin::IssueTrackerValidator do
   describe "#valid?" do
     context "with a complete class" do
       klass = Class.new(ErrbitPlugin::IssueTracker) do
