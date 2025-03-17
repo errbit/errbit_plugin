@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 module ErrbitPlugin
-  class IncompatibilityError < StandardError; end
+  class IncompatibilityError < StandardError
+  end
 
-  class AlreadyRegisteredError < StandardError; end
+  class AlreadyRegisteredError < StandardError
+  end
 
   module Registry
     @issue_trackers = {}
@@ -16,12 +18,12 @@ module ErrbitPlugin
           "issue_tracker '#{key}' already registered"
       end
 
-      validate = ValidateIssueTracker.new(klass)
+      validator = IssueTrackerValidator.new(klass)
 
-      if validate.valid?
+      if validator.valid?
         @issue_trackers[key] = klass
       else
-        raise IncompatibilityError.new(validate.errors.join("; "))
+        raise IncompatibilityError.new(validator.errors.join("; "))
       end
     end
 

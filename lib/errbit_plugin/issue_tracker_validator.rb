@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 module ErrbitPlugin
-  class ValidateIssueTracker
+  class IssueTrackerValidator
+    attr_reader :errors
+
     def initialize(klass)
       @klass = klass
       @errors = []
     end
-    attr_reader :errors
 
     def valid?
       valid_inherit = good_inherit?
