@@ -50,16 +50,44 @@ describe ErrbitPlugin::ValidateIssueTracker do
 
     context "with class not inherit from ErrbitPlugin::IssueTracker" do
       klass = Class.new do
-        def self.label; "foo"; end
-        def self.note; "foo"; end
-        def self.fields; ["foo"]; end
-        def self.icons; {}; end
-        def initialize(params); end
-        def configured?; true; end
-        def errors; true; end
-        def create_issue; "http"; end
-        def close_issue; "http"; end
-        def url; "http"; end
+        def self.label
+          "foo"
+        end
+
+        def self.note
+          "foo"
+        end
+
+        def self.fields
+          ["foo"]
+        end
+
+        def self.icons
+          {}
+        end
+
+        def initialize(params)
+        end
+
+        def configured?
+          true
+        end
+
+        def errors
+          true
+        end
+
+        def create_issue
+          "http"
+        end
+
+        def close_issue
+          "http"
+        end
+
+        def url
+          "http"
+        end
       end
 
       it "not valid" do
