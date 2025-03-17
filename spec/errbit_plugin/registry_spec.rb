@@ -54,7 +54,7 @@ RSpec.describe ErrbitPlugin::Registry do
     end
 
     context "when issue tracker is not valid" do
-      context "raise IncompatibilityError if tracker is not valid" do
+      context "raise IncompatibilityError" do
         let(:issue_tracker_validator) do
           instance_double(ErrbitPlugin::IssueTrackerValidator,
             valid?: false,
@@ -90,11 +90,9 @@ RSpec.describe ErrbitPlugin::Registry do
         end
 
         it "puts the errors in the exception message" do
-          begin
-            ErrbitPlugin::Registry.add_issue_tracker(tracker)
-          rescue ErrbitPlugin::IncompatibilityError => e
-            expect(e.message).to eq("one; two")
-          end
+          ErrbitPlugin::Registry.add_issue_tracker(tracker)
+        rescue ErrbitPlugin::IncompatibilityError => e
+          expect(e.message).to eq("one; two")
         end
       end
     end
