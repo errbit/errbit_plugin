@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["stevecrozz@gmail.com"]
   spec.description   = %q{Base to create an errbit plugin}
   spec.summary       = %q{Base to create an errbit plugin}
-  spec.homepage      = "http://github.com/errbit/errbit"
+  spec.homepage      = "https://github.com/errbit/errbit_plugin"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
