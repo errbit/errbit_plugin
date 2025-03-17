@@ -9,24 +9,6 @@ module ErrbitPlugin
       @options = options
     end
 
-    class << self
-      def label
-        raise NoMethodError, "The ErrbitPlugin::IssueTracker.label method is abstract, an implementation of it must be provided in the subclass"
-      end
-
-      def note
-        raise NoMethodError, "The ErrbitPlugin::IssueTracker.note method is abstract, an implementation of it must be provided in the subclass"
-      end
-
-      def fields
-        raise NoMethodError, "The ErrbitPlugin::IssueTracker.fields method is abstract, an implementation of it must be provided in the subclass"
-      end
-
-      def icons
-        raise NoMethodError, "The ErrbitPlugin::IssueTracker.icons method is abstract, an implementation of it must be provided in the subclass"
-      end
-    end
-
     def configured?
       raise NoMethodError, "The ErrbitPlugin::IssueTracker#configured? method is abstract, an implementation of it must be provided in the subclass"
     end
@@ -45,6 +27,24 @@ module ErrbitPlugin
 
     def url
       raise NoMethodError, "The ErrbitPlugin::IssueTracker#url method is abstract, an implementation of it must be provided in the subclass"
+    end
+
+    class << self
+      def label
+        raise NoMethodError, "The ErrbitPlugin::IssueTracker.label method is abstract, an implementation of it must be provided in the subclass"
+      end
+
+      def note
+        raise NoMethodError, "The ErrbitPlugin::IssueTracker.note method is abstract, an implementation of it must be provided in the subclass"
+      end
+
+      def fields
+        raise NoMethodError, "The ErrbitPlugin::IssueTracker.fields method is abstract, an implementation of it must be provided in the subclass"
+      end
+
+      def icons
+        raise NoMethodError, "The ErrbitPlugin::IssueTracker.icons method is abstract, an implementation of it must be provided in the subclass"
+      end
     end
   end
 end
