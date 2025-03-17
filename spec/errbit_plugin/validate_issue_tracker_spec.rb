@@ -333,14 +333,37 @@ describe ErrbitPlugin::ValidateIssueTracker do
 
     context "without create_issue method" do
       klass = Class.new(ErrbitPlugin::IssueTracker) do
-        def self.label; "foo"; end
-        def self.note; "foo"; end
-        def self.fields; ["foo"]; end
-        def self.icons; {}; end
-        def configured?; true; end
-        def errors; true; end
-        def close_issue; "http"; end
-        def url; "http"; end
+        def self.label
+          "foo"
+        end
+
+        def self.note
+          "foo"
+        end
+
+        def self.fields
+          ["foo"]
+        end
+
+        def self.icons
+          {}
+        end
+
+        def configured?
+          true
+        end
+
+        def errors
+          true
+        end
+
+        def close_issue
+          "http"
+        end
+
+        def url
+          "http"
+        end
       end
 
       it "not valid" do
