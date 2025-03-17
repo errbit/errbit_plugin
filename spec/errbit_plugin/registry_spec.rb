@@ -22,7 +22,7 @@ describe ErrbitPlugin::Registry do
         allow(ErrbitPlugin::ValidateIssueTracker)
           .to receive(:new)
           .with(tracker)
-          .and_return(double(:valid? => true, :message => ""))
+          .and_return(double(valid?: true, message: ""))
       end
       it "add new issue_tracker plugin" do
         ErrbitPlugin::Registry.add_issue_tracker(tracker)
@@ -45,7 +45,7 @@ describe ErrbitPlugin::Registry do
         allow(ErrbitPlugin::ValidateIssueTracker)
           .to receive(:new)
           .with(tracker)
-          .and_return(double(:valid? => false, :message => "foo", :errors => []))
+          .and_return(double(valid?: false, message: "foo", errors: []))
         expect {
           ErrbitPlugin::Registry.add_issue_tracker(tracker)
         }.to raise_error(ErrbitPlugin::IncompatibilityError)
@@ -55,7 +55,7 @@ describe ErrbitPlugin::Registry do
         allow(ErrbitPlugin::ValidateIssueTracker)
           .to receive(:new)
           .with(tracker)
-          .and_return(double(:valid? => false, :message => "foo", :errors => ["one", "two"]))
+          .and_return(double(valid?: false, message: "foo", errors: ["one", "two"]))
 
         begin
           ErrbitPlugin::Registry.add_issue_tracker(tracker)
