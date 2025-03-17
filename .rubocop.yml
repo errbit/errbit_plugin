@@ -6,3 +6,10 @@ Style/StringLiterals:
   Enabled: true
   EnforcedStyle: double_quotes
   ConsistentQuotesInMultiline: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Style/SingleLineMethods:
+  Enabled: true
+  AllowIfMethodIsEmpty: false
