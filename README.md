@@ -29,14 +29,13 @@ the class must extend ErrbitPlugin::IssueTracker. Here's an example:
 
 ```ruby
 class MyIssueTracker < ErrbitPlugin::IssueTracker
-
   # A unique label for your tracker plugin used internally by errbit
   def self.label
-    'my-tracker'
+    "my-tracker"
   end
 
   def self.note
-    'a note about this tracker that users will see'
+    "a note about this tracker that users will see"
   end
 
   # Form fields that will be presented to the administrator when setting up
@@ -60,9 +59,9 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   # and the binary icon data.
   def self.icons
     @icons ||= {
-      create: [ 'image/png', File.read('./path/to/create.png') ],
-      goto: [ 'image/png', File.read('./path/to/goto.png') ],
-      inactive: [ 'image/png', File.read('./path/to/inactive.png') ],
+      create: ["image/png", File.read("./path/to/create.png")],
+      goto: ["image/png", File.read("./path/to/goto.png")],
+      inactive: ["image/png", File.read("./path/to/inactive.png")],
     }
   end
 
@@ -80,7 +79,7 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
     if options[:username]
       {}
     else
-      { field_one: 'username must be present' }
+      {field_one: "username must be present"}
     end
   end
 
@@ -92,7 +91,7 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   def create_issue(title, body, user: {})
     # Create an issue! Then update the problem to link it.
 
-    'http://sometracker.com/my/issue/123'
+    "https://sometracker.com/my/issue/123"
   end
 
   # This method is optional. Errbit will create body text for your issue by
@@ -107,7 +106,7 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   # @see http://apidock.com/rails/ActionController/Base/render_to_string
   def render_body_args
     # In this example, we want to render a special file
-    ['/path/to/some/template', formats: [:rdoc]]
+    ["/path/to/some/template", formats: [:rdoc]]
   end
 
   # This method is optional, and is where you actually go close the issue on
@@ -121,7 +120,7 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
 
   # The URL for your remote issue tracker
   def url
-    'http://some-remote-tracker.com'
+    "https://some-remote-tracker.com"
   end
 end
 ```
