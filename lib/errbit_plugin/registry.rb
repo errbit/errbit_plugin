@@ -20,7 +20,7 @@ module ErrbitPlugin
       if validate.valid?
         @issue_trackers[key] = klass
       else
-        raise IncompatibilityError.new(validate.errors.join('; '))
+        raise IncompatibilityError.new(validate.errors.join("; "))
       end
     end
 
