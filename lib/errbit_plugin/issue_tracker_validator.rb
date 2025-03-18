@@ -30,7 +30,7 @@ module ErrbitPlugin
     end
 
     def implements_instance_methods?
-      impl = [:configured?, :errors, :create_issue, :url].map do |method|
+      impl = [:configured?, :errors, :create_issue, :close_issue, :url].map do |method|
         if @klass.instance_methods(false).include?(method)
           true
         else
