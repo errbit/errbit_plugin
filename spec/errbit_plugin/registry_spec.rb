@@ -10,6 +10,38 @@ RSpec.describe ErrbitPlugin::Registry do
       def self.label
         "something"
       end
+
+      def self.note
+        "note"
+      end
+
+      def self.fields
+        ["foo"]
+      end
+
+      def self.icons
+        {}
+      end
+
+      def configured?
+        true
+      end
+
+      def errors
+        true
+      end
+
+      def create_issue
+        "http"
+      end
+
+      def close_issue
+        "http"
+      end
+
+      def url
+        "http"
+      end
     end
   end
 
