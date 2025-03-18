@@ -295,51 +295,53 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
     end
 
-    # context "without url method" do
-    #   klass = Class.new(ErrbitPlugin::IssueTracker) do
-    #     def self.label
-    #       "foo"
-    #     end
-    #
-    #     def self.note
-    #       "foo"
-    #     end
-    #
-    #     def self.fields
-    #       ["foo"]
-    #     end
-    #
-    #     def self.icons
-    #       {}
-    #     end
-    #
-    #     def configured?
-    #       true
-    #     end
-    #
-    #     def errors
-    #       true
-    #     end
-    #
-    #     def create_issue
-    #       "http"
-    #     end
-    #
-    #     def close_issue
-    #       "http"
-    #     end
-    #   end
-    #
-    #   it "not valid" do
-    #     expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
-    #   end
-    #
-    #   it "say not implement url method" do
-    #     is = ErrbitPlugin::IssueTrackerValidator.new(klass)
-    #     is.valid?
-    #     expect(is.errors).to eql [[:instance_method_missing, :url]]
-    #   end
-    # end
+    context "without #url method" do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do
+        def self.label
+          "foo"
+        end
+
+        def self.note
+          "foo"
+        end
+
+        def self.fields
+          ["foo"]
+        end
+
+        def self.icons
+          {}
+        end
+
+        def configured?
+          true
+        end
+
+        def errors
+          true
+        end
+
+        def create_issue
+          "http"
+        end
+
+        def close_issue
+          "http"
+        end
+      end
+
+      it "is not valid" do
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to eq(false)
+      end
+
+      it "say not implement url method" do
+        validator = ErrbitPlugin::IssueTrackerValidator.new(klass)
+
+        validator.valid?
+
+        expect(validator.errors).to eq([[:instance_method_missing, :url]])
+      end
+    end
 
     context "without .label method" do
       klass = Class.new(ErrbitPlugin::IssueTracker) do
