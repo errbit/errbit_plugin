@@ -103,7 +103,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
     end
 
-    context "with no label method" do
+    context "without .label method" do
       klass = Class.new(ErrbitPlugin::IssueTracker) do
         def self.note
           "foo"
@@ -151,7 +151,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
     end
 
-    context "with no icons method" do
+    context "without .icons method" do
       klass = Class.new(ErrbitPlugin::IssueTracker) do
         def self.note
           "foo"
@@ -199,51 +199,101 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
     end
 
-    # context "without fields method" do
-    #   klass = Class.new(ErrbitPlugin::IssueTracker) do
-    #     def self.label
-    #       "foo"
-    #     end
-    #
-    #     def self.note
-    #       "foo"
-    #     end
-    #
-    #     def self.icons
-    #       {}
-    #     end
-    #
-    #     def configured?
-    #       true
-    #     end
-    #
-    #     def errors
-    #       true
-    #     end
-    #
-    #     def create_issue
-    #       "http"
-    #     end
-    #
-    #     def close_issue
-    #       "http"
-    #     end
-    #
-    #     def url
-    #       "http"
-    #     end
-    #   end
-    #
-    #   it "not valid" do
-    #     expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
-    #   end
-    #
-    #   it "say not implement fields method" do
-    #     is = ErrbitPlugin::IssueTrackerValidator.new(klass)
-    #     is.valid?
-    #     expect(is.errors).to eql [[:class_method_missing, :fields]]
-    #   end
-    # end
+    context "without .fields method" do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do
+        def self.label
+          "foo"
+        end
+
+        def self.note
+          "foo"
+        end
+
+        def self.icons
+          {}
+        end
+
+        def configured?
+          true
+        end
+
+        def errors
+          true
+        end
+
+        def create_issue
+          "http"
+        end
+
+        def close_issue
+          "http"
+        end
+
+        def url
+          "http"
+        end
+      end
+
+      it "is not valid" do
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to eq(false)
+      end
+
+      it "say not implement fields method" do
+        validator = ErrbitPlugin::IssueTrackerValidator.new(klass)
+
+        validator.valid?
+
+        expect(validator.errors).to eq([[:class_method_missing, :fields]])
+      end
+    end
+
+    context "without .note method" do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do
+        def self.label
+          "foo"
+        end
+
+        def self.fields
+          ["foo"]
+        end
+
+        def self.icons
+          {}
+        end
+
+        def configured?
+          true
+        end
+
+        def errors
+          true
+        end
+
+        def create_issue
+          "http"
+        end
+
+        def close_issue
+          "http"
+        end
+
+        def url
+          "foo"
+        end
+      end
+
+      it "is not valid" do
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to eq(false)
+      end
+
+      it "say not implement note method" do
+        validator = ErrbitPlugin::IssueTrackerValidator.new(klass)
+
+        validator.valid?
+
+        expect(validator.errors).to eq([[:class_method_missing, :note]])
+      end
+    end
 
     # context "without configured? method" do
     #   klass = Class.new(ErrbitPlugin::IssueTracker) do
@@ -473,52 +523,6 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
     #     is = ErrbitPlugin::IssueTrackerValidator.new(klass)
     #     is.valid?
     #     expect(is.errors).to eql [[:instance_method_missing, :url]]
-    #   end
-    # end
-
-    # context "without note method" do
-    #   klass = Class.new(ErrbitPlugin::IssueTracker) do
-    #     def self.label
-    #       "foo"
-    #     end
-    #
-    #     def self.fields
-    #       ["foo"]
-    #     end
-    #
-    #     def self.icons
-    #       {}
-    #     end
-    #
-    #     def configured?
-    #       true
-    #     end
-    #
-    #     def errors
-    #       true
-    #     end
-    #
-    #     def create_issue
-    #       "http"
-    #     end
-    #
-    #     def close_issue
-    #       "http"
-    #     end
-    #
-    #     def url
-    #       "foo"
-    #     end
-    #   end
-    #
-    #   it "not valid" do
-    #     expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
-    #   end
-    #
-    #   it "say not implement note method" do
-    #     is = ErrbitPlugin::IssueTrackerValidator.new(klass)
-    #     is.valid?
-    #     expect(is.errors).to eql [[:class_method_missing, :note]]
     #   end
     # end
   end
