@@ -24,16 +24,18 @@ module ErrbitPlugin
         true
       else
         add_errors(:not_inherited)
+
         false
       end
     end
 
     def implements_instance_methods?
       impl = [:configured?, :errors, :create_issue, :url].map do |method|
-        if instance.respond_to?(method)
+        if @klass.instance_methods(false).include?(method)
           true
         else
           add_errors(:instance_method_missing, method)
+
           false
         end
       end
@@ -43,10 +45,11 @@ module ErrbitPlugin
 
     def implements_class_methods?
       impl = [:label, :fields, :note, :icons].map do |method|
-        if @klass.respond_to?(method)
+        if @klass.methods(false).include?(method)
           true
         else
           add_errors(:class_method_missing, method)
+
           false
         end
       end
