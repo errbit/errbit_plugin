@@ -57,10 +57,6 @@ module ErrbitPlugin
       impl.all? { |value| value == true }
     end
 
-    def instance
-      @instance ||= @klass.new({})
-    end
-
     def add_errors(key, value = nil)
       @errors << [key, value].compact
     end
