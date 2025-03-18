@@ -48,58 +48,60 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
     end
 
-    # context "with class not inherit from ErrbitPlugin::IssueTracker" do
-    #   klass = Class.new do
-    #     def self.label
-    #       "foo"
-    #     end
-    #
-    #     def self.note
-    #       "foo"
-    #     end
-    #
-    #     def self.fields
-    #       ["foo"]
-    #     end
-    #
-    #     def self.icons
-    #       {}
-    #     end
-    #
-    #     def initialize(params)
-    #     end
-    #
-    #     def configured?
-    #       true
-    #     end
-    #
-    #     def errors
-    #       true
-    #     end
-    #
-    #     def create_issue
-    #       "http"
-    #     end
-    #
-    #     def close_issue
-    #       "http"
-    #     end
-    #
-    #     def url
-    #       "http"
-    #     end
-    #   end
-    #
-    #   it "not valid" do
-    #     expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
-    #   end
-    #
-    #   it "says :not_inherited" do
-    #     is = ErrbitPlugin::IssueTrackerValidator.new(klass)
-    #     is.valid?
-    #     expect(is.errors).to eql [[:not_inherited]]
-    #   end
-    # end
+    context "with class not inherit from ErrbitPlugin::IssueTracker" do
+      klass = Class.new do
+        def self.label
+          "foo"
+        end
+
+        def self.note
+          "foo"
+        end
+
+        def self.fields
+          ["foo"]
+        end
+
+        def self.icons
+          {}
+        end
+
+        def initialize(*)
+        end
+
+        def configured?
+          true
+        end
+
+        def errors
+          true
+        end
+
+        def create_issue
+          "http"
+        end
+
+        def close_issue
+          "http"
+        end
+
+        def url
+          "http"
+        end
+      end
+
+      it "is not valid" do
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to eq(false)
+      end
+
+      it "says :not_inherited" do
+        validator = ErrbitPlugin::IssueTrackerValidator.new(klass)
+
+        validator.valid?
+
+        expect(validator.errors).to eq([[:not_inherited]])
+      end
+    end
 
     # context "with no label method" do
     #   klass = Class.new(ErrbitPlugin::IssueTracker) do
