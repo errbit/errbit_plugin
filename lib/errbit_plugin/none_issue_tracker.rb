@@ -15,19 +15,11 @@ module ErrbitPlugin
     end
 
     def self.icons
-      @icons ||= {
-        create: ["image/png", read_static_file("none_create.png")],
-        goto: ["image/png", read_static_file("none_create.png")],
-        inactive: ["image/png", read_static_file("none_inactive.png")]
+      {
+        create: "none_create.png",
+        goto: "none_create.png",
+        inactive: "none_inactive.png"
       }
-    end
-
-    def self.read_static_file(file)
-      File.read(
-        File.expand_path(
-          File.join(File.dirname(__FILE__), "..", "..", "..", "static", file)
-        )
-      )
     end
 
     ##
