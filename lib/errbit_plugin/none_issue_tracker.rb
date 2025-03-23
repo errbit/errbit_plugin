@@ -16,9 +16,9 @@ module ErrbitPlugin
 
     def self.icons
       {
-        create: "none_create.png",
-        goto: "none_create.png",
-        inactive: "none_inactive.png"
+        create: "errbit_plugin/none_create.png",
+        goto: "errbit_plugin/none_create.png",
+        inactive: "errbit_plugin/none_inactive.png"
       }
     end
 

@@ -5,7 +5,7 @@ require "rails/engine"
 module ErrbitPlugin
   class Engine < ::Rails::Engine
     initializer :assets do
-      Rails.application.config.assets.paths << root.join("app", "assets", "images", "errbit_plugin")
+      Rails.application.config.assets.paths << root.join("app", "assets", "images")
     end
   end
 end
