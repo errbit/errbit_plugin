@@ -25,19 +25,11 @@ RSpec.describe ErrbitPlugin::NoneIssueTracker do
 
   it { expect(described_class.fields).to eq({}) }
 
-  # def self.icons
-  #   @icons ||= {
-  #     create: ["image/png", read_static_file("none_create.png")],
-  #     goto: ["image/png", read_static_file("none_create.png")],
-  #     inactive: ["image/png", read_static_file("none_inactive.png")]
-  #   }
-  # end
-  #
-  # def self.read_static_file(file)
-  #   File.read(
-  #     File.expand_path(
-  #       File.join(File.dirname(__FILE__), "..", "..", "..", "static", file)
-  #     )
-  #   )
-  # end
+  it do
+    expect(described_class.icons).to eq({
+      create: "errbit_plugin/none_create.png",
+      goto: "errbit_plugin/none_create.png",
+      inactive: "errbit_plugin/none_inactive.png"
+    })
+  end
 end
