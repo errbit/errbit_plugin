@@ -1,8 +1,10 @@
-# ErrbitPlugin [![Build Status](https://travis-ci.org/errbit/errbit_plugin.svg?branch=master)](https://travis-ci.org/errbit/errbit_plugin)
+# ErrbitPlugin
+
 ErrbitPlugin provides a set of base classes that you can extend to create
 Errbit plugins.
 
 ## Creating plugins
+
 ErrbitPlugins are Ruby gems that extend the functionality of Errbit. To get
 started, create a Ruby gem and add 'errbit_plugin' as a dependency in your
 gem's gemspec.
@@ -11,28 +13,29 @@ Now you can start adding plugins. At the moment, there is only one kind of
 plugin you can create, and that is the issue tracker.
 
 ### Issue Trackers
+
 An issue tracker plugin is a Ruby class that enables you to link errors within
-errbit to an issue in an external issue tracker like Github. An app within
+errbit to an issue in an external issue tracker like GitHub. An app within
 errbit can be associated an issue tracker or not. When there is an association,
 errbit users can choose 'create issue' from an error page which will both
 create an issue on the external issue tracker out of the given error and link
 that issue to the errbit error. Likewise, a user can also choose 'close issue'
-to close the issue on the external issue tracker, if your plugin provides a 
+to close the issue on the external issue tracker, if your plugin provides a
 method to do so.
 
 Your issue tracker plugin is responsible for providing the interface defined by
 ErrbitPlugin::IssueTracker. All of the required methods must be implemented and
 the class must extend ErrbitPlugin::IssueTracker. Here's an example:
+
 ```ruby
 class MyIssueTracker < ErrbitPlugin::IssueTracker
-
   # A unique label for your tracker plugin used internally by errbit
   def self.label
-    'my-tracker'
+    "my-tracker"
   end
 
   def self.note
-    'a note about this tracker that users will see'
+    "a note about this tracker that users will see"
   end
 
   # Form fields that will be presented to the administrator when setting up
@@ -56,9 +59,9 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   # and the binary icon data.
   def self.icons
     @icons ||= {
-      create: [ 'image/png', File.read('./path/to/create.png') ],
-      goto: [ 'image/png', File.read('./path/to/goto.png') ],
-      inactive: [ 'image/png', File.read('./path/to/inactive.png') ],
+      create: ["image/png", File.read("./path/to/create.png")],
+      goto: ["image/png", File.read("./path/to/goto.png")],
+      inactive: ["image/png", File.read("./path/to/inactive.png")],
     }
   end
 
@@ -76,7 +79,7 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
     if options[:username]
       {}
     else
-      { field_one: 'username must be present' }
+      {field_one: "username must be present"}
     end
   end
 
@@ -88,7 +91,7 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   def create_issue(title, body, user: {})
     # Create an issue! Then update the problem to link it.
 
-    'http://sometracker.com/my/issue/123'
+    "https://sometracker.com/my/issue/123"
   end
 
   # This method is optional. Errbit will create body text for your issue by
@@ -103,7 +106,7 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   # @see http://apidock.com/rails/ActionController/Base/render_to_string
   def render_body_args
     # In this example, we want to render a special file
-    ['/path/to/some/template', formats: [:rdoc]]
+    ["/path/to/some/template", formats: [:rdoc]]
   end
 
   # This method is optional, and is where you actually go close the issue on
@@ -117,14 +120,12 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
 
   # The URL for your remote issue tracker
   def url
-    'http://some-remote-tracker.com'
+    "https://some-remote-tracker.com"
   end
 end
 ```
 
-
-
 ## Contributing
 
 Discuss any changes you'd like to make with the authors on the mailing list, or
-by opening a github issue.
+by opening a GitHub issue.
