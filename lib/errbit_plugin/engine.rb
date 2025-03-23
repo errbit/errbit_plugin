@@ -6,7 +6,7 @@ module ErrbitPlugin
   class Engine < Rails::Engine
     # :nocov:
     initializer :assets do
-      Rails.application.config.assets.paths << root.join("app", "assets", "images")
+      Rails.application.config.assets.paths << root.join("app", "assets", "images", "errbit_plugin")
     end
     # :nocov:
   end
