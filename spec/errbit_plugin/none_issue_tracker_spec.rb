@@ -27,9 +27,9 @@ RSpec.describe ErrbitPlugin::NoneIssueTracker do
 
   it do
     expect(described_class.icons).to eq({
-      create: "errbit_plugin/none_create.png",
-      goto: "errbit_plugin/none_create.png",
-      inactive: "errbit_plugin/none_inactive.png"
+      create: "none_create.png",
+      goto: "none_create.png",
+      inactive: "none_inactive.png"
     })
   end
 end
