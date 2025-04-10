@@ -7,7 +7,7 @@ module ErrbitPlugin
     end
 
     def self.note
-      "When no issue tracker has been configured, you will be able to " <<
+      "When no issue tracker has been configured, you will be able to " \
         "leave comments on errors."
     end
 
