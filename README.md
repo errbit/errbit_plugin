@@ -1,5 +1,7 @@
 # ErrbitPlugin
 
+[![RSpec](https://github.com/errbit/errbit_plugin/actions/workflows/rspec.yml/badge.svg)](https://github.com/errbit/errbit_plugin/actions/workflows/rspec.yml)
+
 ErrbitPlugin provides a set of base classes that you can extend to create
 Errbit plugins.
 
