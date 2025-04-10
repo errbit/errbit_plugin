@@ -19,7 +19,7 @@ RSpec.describe ErrbitPlugin::Registry do
   describe ".add_issue_tracker" do
     context "with issue_tracker class valid" do
       before do
-        allow(ErrbitPlugin::ValidateIssueTracker)
+        allow(ErrbitPlugin::IssueTrackerValidator)
           .to receive(:new)
           .with(tracker)
           .and_return(double(valid?: true, message: ""))
@@ -42,7 +42,7 @@ RSpec.describe ErrbitPlugin::Registry do
 
     context "with an IssueTracker not valid" do
       it "raise an IncompatibilityError" do
-        allow(ErrbitPlugin::ValidateIssueTracker)
+        allow(ErrbitPlugin::IssueTrackerValidator)
           .to receive(:new)
           .with(tracker)
           .and_return(double(valid?: false, message: "foo", errors: []))
@@ -52,7 +52,7 @@ RSpec.describe ErrbitPlugin::Registry do
       end
 
       it "puts the errors in the exception message" do
-        allow(ErrbitPlugin::ValidateIssueTracker)
+        allow(ErrbitPlugin::IssueTrackerValidator)
           .to receive(:new)
           .with(tracker)
           .and_return(double(valid?: false, message: "foo", errors: ["one", "two"]))

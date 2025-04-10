@@ -16,12 +16,12 @@ module ErrbitPlugin
           "issue_tracker '#{key}' already registered"
       end
 
-      validate = ValidateIssueTracker.new(klass)
+      validator = IssueTrackerValidator.new(klass)
 
-      if validate.valid?
+      if validator.valid?
         @issue_trackers[key] = klass
       else
-        raise IncompatibilityError.new(validate.errors.join("; "))
+        raise IncompatibilityError.new(validator.errors.join("; "))
       end
     end
 
