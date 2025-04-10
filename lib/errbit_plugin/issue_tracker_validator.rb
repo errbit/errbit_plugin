@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ErrbitPlugin
-  class ValidateIssueTracker
+  class IssueTrackerValidator
     def initialize(klass)
       @klass = klass
       @errors = []

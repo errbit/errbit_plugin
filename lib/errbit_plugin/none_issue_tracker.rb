@@ -7,7 +7,7 @@ module ErrbitPlugin
     end
 
     def self.note
-      "When no issue tracker has been configured, you will be able to " <<
+      "When no issue tracker has been configured, you will be able to " \
         "leave comments on errors."
     end
 
@@ -25,7 +25,7 @@ module ErrbitPlugin
 
     def self.read_static_file(file)
       File.read(File.expand_path(File.join(
-        File.dirname(__FILE__), "..", "..", "..", "static", file
+        File.dirname(__FILE__), "..", "..", "static", file
       )))
     end
 

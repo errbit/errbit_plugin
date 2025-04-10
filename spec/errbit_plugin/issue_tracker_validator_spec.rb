@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe ErrbitPlugin::ValidateIssueTracker do
+RSpec.describe ErrbitPlugin::IssueTrackerValidator do
   describe "#valid?" do
     context "with a complete class" do
       klass = Class.new(ErrbitPlugin::IssueTracker) do
@@ -44,7 +44,7 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it "valid" do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be true
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be true
       end
     end
 
@@ -91,11 +91,11 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
       end
 
       it "says :not_inherited" do
-        is = ErrbitPlugin::ValidateIssueTracker.new(klass)
+        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
         is.valid?
         expect(is.errors).to eql [[:not_inherited]]
       end
@@ -137,11 +137,11 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
       end
 
       it "say not implement label method" do
-        is = ErrbitPlugin::ValidateIssueTracker.new(klass)
+        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
         is.valid?
         expect(is.errors).to eql [[:class_method_missing, :label]]
       end
@@ -183,11 +183,11 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
       end
 
       it "say not implement icons method" do
-        is = ErrbitPlugin::ValidateIssueTracker.new(klass)
+        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
         is.valid?
         expect(is.errors).to eql [[:class_method_missing, :icons]]
       end
@@ -229,11 +229,11 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
       end
 
       it "say not implement fields method" do
-        is = ErrbitPlugin::ValidateIssueTracker.new(klass)
+        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
         is.valid?
         expect(is.errors).to eql [[:class_method_missing, :fields]]
       end
@@ -275,11 +275,11 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
       end
 
       it "say not implement configured? method" do
-        is = ErrbitPlugin::ValidateIssueTracker.new(klass)
+        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
         is.valid?
         expect(is.errors).to eql [[:instance_method_missing, :configured?]]
       end
@@ -321,11 +321,11 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
       end
 
       it "say not implement errors method" do
-        is = ErrbitPlugin::ValidateIssueTracker.new(klass)
+        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
         is.valid?
         expect(is.errors).to eql [[:instance_method_missing, :errors]]
       end
@@ -367,10 +367,10 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
       end
       it "say not implement create_issue method" do
-        is = ErrbitPlugin::ValidateIssueTracker.new(klass)
+        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
         is.valid?
         expect(is.errors).to eql [[:instance_method_missing, :create_issue]]
       end
@@ -413,10 +413,10 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it "is valid" do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be true
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be true
       end
       it "not say not implement close_issue method" do
-        is = ErrbitPlugin::ValidateIssueTracker.new(klass)
+        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
         is.valid?
         expect(is.errors).not_to eql [[:instance_method_missing, :close_issue]]
       end
@@ -458,11 +458,11 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
       end
 
       it "say not implement url method" do
-        is = ErrbitPlugin::ValidateIssueTracker.new(klass)
+        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
         is.valid?
         expect(is.errors).to eql [[:instance_method_missing, :url]]
       end
@@ -504,11 +504,11 @@ describe ErrbitPlugin::ValidateIssueTracker do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::ValidateIssueTracker.new(klass).valid?).to be false
+        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
       end
 
       it "say not implement note method" do
-        is = ErrbitPlugin::ValidateIssueTracker.new(klass)
+        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
         is.valid?
         expect(is.errors).to eql [[:class_method_missing, :note]]
       end
