@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ErrbitPlugin
   class IncompatibilityError < StandardError; end
   class AlreadyRegisteredError < StandardError; end
