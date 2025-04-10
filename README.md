@@ -1,8 +1,10 @@
-# ErrbitPlugin [![Build Status](https://travis-ci.org/errbit/errbit_plugin.svg?branch=master)](https://travis-ci.org/errbit/errbit_plugin)
+# ErrbitPlugin
+
 ErrbitPlugin provides a set of base classes that you can extend to create
 Errbit plugins.
 
 ## Creating plugins
+
 ErrbitPlugins are Ruby gems that extend the functionality of Errbit. To get
 started, create a Ruby gem and add 'errbit_plugin' as a dependency in your
 gem's gemspec.
@@ -11,6 +13,7 @@ Now you can start adding plugins. At the moment, there is only one kind of
 plugin you can create, and that is the issue tracker.
 
 ### Issue Trackers
+
 An issue tracker plugin is a Ruby class that enables you to link errors within
 errbit to an issue in an external issue tracker like Github. An app within
 errbit can be associated an issue tracker or not. When there is an association,
@@ -23,6 +26,7 @@ method to do so.
 Your issue tracker plugin is responsible for providing the interface defined by
 ErrbitPlugin::IssueTracker. All of the required methods must be implemented and
 the class must extend ErrbitPlugin::IssueTracker. Here's an example:
+
 ```ruby
 class MyIssueTracker < ErrbitPlugin::IssueTracker
 
@@ -121,8 +125,6 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   end
 end
 ```
-
-
 
 ## Contributing
 
