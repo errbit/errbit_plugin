@@ -2,6 +2,7 @@
 
 module ErrbitPlugin
   class IncompatibilityError < StandardError; end
+
   class AlreadyRegisteredError < StandardError; end
 
   module Registry
@@ -20,7 +21,7 @@ module ErrbitPlugin
       if validate.valid?
         @issue_trackers[key] = klass
       else
-        raise IncompatibilityError.new(validate.errors.join('; '))
+        raise IncompatibilityError.new(validate.errors.join("; "))
       end
     end
 

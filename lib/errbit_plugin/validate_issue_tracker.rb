@@ -19,11 +19,11 @@ module ErrbitPlugin
     private
 
     def good_inherit?
-      unless @klass.ancestors.include?(ErrbitPlugin::IssueTracker)
+      if @klass.ancestors.include?(ErrbitPlugin::IssueTracker)
+        true
+      else
         add_errors(:not_inherited)
         false
-      else
-        true
       end
     end
 
@@ -57,7 +57,7 @@ module ErrbitPlugin
       @instance ||= @klass.new({})
     end
 
-    def add_errors(key, value=nil)
+    def add_errors(key, value = nil)
       @errors << [key, value].compact
     end
   end

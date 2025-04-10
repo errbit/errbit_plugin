@@ -1,5 +1,9 @@
 # ErrbitPlugin
 
+[![RSpec](https://github.com/errbit/errbit_plugin/actions/workflows/rspec.yml/badge.svg)](https://github.com/errbit/errbit_plugin/actions/workflows/rspec.yml)
+[![RSpec on JRuby](https://github.com/errbit/errbit_plugin/actions/workflows/jruby.yml/badge.svg)](https://github.com/errbit/errbit_plugin/actions/workflows/jruby.yml)
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/standardrb/standard)
+
 ErrbitPlugin provides a set of base classes that you can extend to create
 Errbit plugins.
 
