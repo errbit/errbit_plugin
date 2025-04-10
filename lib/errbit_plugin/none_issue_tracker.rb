@@ -25,7 +25,7 @@ module ErrbitPlugin
 
     def self.read_static_file(file)
       File.read(File.expand_path(File.join(
-        File.dirname(__FILE__), "..", "..", "..", "static", file
+        File.dirname(__FILE__), "..", "..", "static", file
       )))
     end
 
