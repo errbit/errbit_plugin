@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "errbit_plugin/version"
+require_relative "lib/errbit_plugin/version"
 
 Gem::Specification.new do |spec|
   spec.name = "errbit_plugin"
   spec.version = ErrbitPlugin::VERSION
   spec.authors = ["Stephen Crosby"]
   spec.email = ["stevecrozz@gmail.com"]
+
   spec.description = "Base to create an errbit plugin"
   spec.summary = "Base to create an errbit plugin"
-  spec.homepage = "http://github.com/errbit/errbit"
+  spec.homepage = "https://github.com/errbit/errbit"
   spec.license = "MIT"
 
   spec.files = `git ls-files`.split($/)
