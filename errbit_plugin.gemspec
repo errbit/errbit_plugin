@@ -8,10 +8,11 @@ Gem::Specification.new do |spec|
   spec.authors = ["Stephen Crosby"]
   spec.email = ["stevecrozz@gmail.com"]
 
-  spec.description = "Base to create an errbit plugin"
   spec.summary = "Base to create an errbit plugin"
-  spec.homepage = "https://github.com/errbit/errbit"
+  spec.description = "Base to create an errbit plugin"
+  spec.homepage = "https://github.com/errbit/errbit_plugin"
   spec.license = "MIT"
+  spec.required_ruby_version = ">= 3.1.0"
 
   spec.files = `git ls-files`.split($/)
   spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
