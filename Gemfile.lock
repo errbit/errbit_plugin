@@ -84,7 +84,8 @@ GEM
     unicode-emoji (4.0.4)
 
 PLATFORMS
-  arm64-darwin-24
+  arm64-darwin
+  ruby
 
 DEPENDENCIES
   errbit_plugin!
