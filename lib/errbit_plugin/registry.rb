@@ -11,7 +11,7 @@ module ErrbitPlugin
     def self.add_issue_tracker(klass)
       key = klass.label
 
-      if issue_trackers.has_key?(key)
+      if issue_trackers.key?(key)
         raise AlreadyRegisteredError,
           "issue_tracker '#{key}' already registered"
       end
