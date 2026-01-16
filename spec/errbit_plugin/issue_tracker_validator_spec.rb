@@ -44,7 +44,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
 
       it "valid" do
-        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be true
+        expect(described_class.new(klass).valid?).to eq(true)
       end
     end
 
@@ -91,13 +91,13 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
+        expect(described_class.new(klass).valid?).to eq(false)
       end
 
       it "says :not_inherited" do
-        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
+        is = described_class.new(klass)
         is.valid?
-        expect(is.errors).to eql [[:not_inherited]]
+        expect(is.errors).to eq([[:not_inherited]])
       end
     end
 
@@ -137,13 +137,13 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
+        expect(described_class.new(klass).valid?).to eq(false)
       end
 
       it "say not implement label method" do
-        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
+        is = described_class.new(klass)
         is.valid?
-        expect(is.errors).to eql [[:class_method_missing, :label]]
+        expect(is.errors).to eq([[:class_method_missing, :label]])
       end
     end
 
@@ -183,13 +183,13 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
+        expect(described_class.new(klass).valid?).to eq(false)
       end
 
       it "say not implement icons method" do
-        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
+        is = described_class.new(klass)
         is.valid?
-        expect(is.errors).to eql [[:class_method_missing, :icons]]
+        expect(is.errors).to eq([[:class_method_missing, :icons]])
       end
     end
 
@@ -229,13 +229,13 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
+        expect(described_class.new(klass).valid?).to eq(false)
       end
 
       it "say not implement fields method" do
-        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
+        is = described_class.new(klass)
         is.valid?
-        expect(is.errors).to eql [[:class_method_missing, :fields]]
+        expect(is.errors).to eq([[:class_method_missing, :fields]])
       end
     end
 
@@ -275,13 +275,13 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
+        expect(described_class.new(klass).valid?).to eq(false)
       end
 
       it "say not implement configured? method" do
-        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
+        is = described_class.new(klass)
         is.valid?
-        expect(is.errors).to eql [[:instance_method_missing, :configured?]]
+        expect(is.errors).to eq([[:instance_method_missing, :configured?]])
       end
     end
 
@@ -321,13 +321,13 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
+        expect(described_class.new(klass).valid?).to eq(false)
       end
 
       it "say not implement errors method" do
-        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
+        is = described_class.new(klass)
         is.valid?
-        expect(is.errors).to eql [[:instance_method_missing, :errors]]
+        expect(is.errors).to eq([[:instance_method_missing, :errors]])
       end
     end
 
@@ -367,12 +367,13 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
+        expect(described_class.new(klass).valid?).to eq(false)
       end
+
       it "say not implement create_issue method" do
-        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
+        is = described_class.new(klass)
         is.valid?
-        expect(is.errors).to eql [[:instance_method_missing, :create_issue]]
+        expect(is.errors).to eq([[:instance_method_missing, :create_issue]])
       end
     end
 
@@ -413,12 +414,13 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
 
       it "is valid" do
-        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be true
+        expect(described_class.new(klass).valid?).to eq(true)
       end
+
       it "not say not implement close_issue method" do
-        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
+        is = described_class.new(klass)
         is.valid?
-        expect(is.errors).not_to eql [[:instance_method_missing, :close_issue]]
+        expect(is.errors).not_to eq([[:instance_method_missing, :close_issue]])
       end
     end
 
@@ -458,13 +460,13 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
+        expect(described_class.new(klass).valid?).to eq(false)
       end
 
       it "say not implement url method" do
-        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
+        is = described_class.new(klass)
         is.valid?
-        expect(is.errors).to eql [[:instance_method_missing, :url]]
+        expect(is.errors).to eq([[:instance_method_missing, :url]])
       end
     end
 
@@ -504,13 +506,13 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
       end
 
       it "not valid" do
-        expect(ErrbitPlugin::IssueTrackerValidator.new(klass).valid?).to be false
+        expect(described_class.new(klass).valid?).to eq(false)
       end
 
       it "say not implement note method" do
-        is = ErrbitPlugin::IssueTrackerValidator.new(klass)
+        is = described_class.new(klass)
         is.valid?
-        expect(is.errors).to eql [[:class_method_missing, :note]]
+        expect(is.errors).to eq([[:class_method_missing, :note]])
       end
     end
   end
