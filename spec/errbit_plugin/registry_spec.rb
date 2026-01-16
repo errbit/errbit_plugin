@@ -7,14 +7,14 @@ RSpec.describe ErrbitPlugin::Registry do
     described_class.clear_issue_trackers
   end
 
-  let(:tracker) {
+  let(:tracker) do
     tracker = Class.new(ErrbitPlugin::IssueTracker) do
       def self.label
         "something"
       end
     end
     tracker
-  }
+  end
 
   describe ".add_issue_tracker" do
     context "with issue_tracker class valid" do
@@ -37,9 +37,9 @@ RSpec.describe ErrbitPlugin::Registry do
         it "raise ErrbitPlugin::AlreadyRegisteredError" do
           described_class.add_issue_tracker(tracker)
 
-          expect {
+          expect do
             described_class.add_issue_tracker(tracker)
-          }.to raise_error(ErrbitPlugin::AlreadyRegisteredError)
+          end.to raise_error(ErrbitPlugin::AlreadyRegisteredError)
         end
       end
     end
@@ -51,9 +51,9 @@ RSpec.describe ErrbitPlugin::Registry do
           .with(tracker)
           .and_return(double(valid?: false, message: "foo", errors: []))
 
-        expect {
+        expect do
           described_class.add_issue_tracker(tracker)
-        }.to raise_error(ErrbitPlugin::IncompatibilityError)
+        end.to raise_error(ErrbitPlugin::IncompatibilityError)
       end
 
       it "puts the errors in the exception message" do
