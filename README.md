@@ -1,7 +1,6 @@
 # ErrbitPlugin
 
 [![RSpec](https://github.com/errbit/errbit_plugin/actions/workflows/rspec.yml/badge.svg)](https://github.com/errbit/errbit_plugin/actions/workflows/rspec.yml)
-[![RSpec on JRuby](https://github.com/errbit/errbit_plugin/actions/workflows/jruby.yml/badge.svg)](https://github.com/errbit/errbit_plugin/actions/workflows/jruby.yml)
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/standardrb/standard)
 
 ErrbitPlugin provides a set of base classes that you can extend to create
@@ -19,7 +18,7 @@ plugin you can create, and that is the issue tracker.
 ### Issue Trackers
 
 An issue tracker plugin is a Ruby class that enables you to link errors within
-errbit to an issue in an external issue tracker like Github. An app within
+errbit to an issue in an external issue tracker like GitHub. An app within
 errbit can be associated an issue tracker or not. When there is an association,
 errbit users can choose 'create issue' from an error page which will both
 create an issue on the external issue tracker out of the given error and link
@@ -133,4 +132,4 @@ end
 ## Contributing
 
 Discuss any changes you'd like to make with the authors on the mailing list, or
-by opening a github issue.
+by opening a GitHub issue.
