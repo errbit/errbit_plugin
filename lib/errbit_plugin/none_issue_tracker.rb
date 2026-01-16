@@ -44,11 +44,11 @@ module ErrbitPlugin
       ""
     end
 
-    def create_issue(*)
+    def create_issue(*) # rubocop:disable Naming/PredicateMethod
       false
     end
 
-    def close_issue(*)
+    def close_issue(*) # rubocop:disable Naming/PredicateMethod
       false
     end
   end
