@@ -1,13 +1,11 @@
-require:
-  - rubocop-disable_syntax
-
 plugins:
   - rubocop-performance
   - rubocop-rake
   - rubocop-rspec
+  - rubocop-disable_syntax
 
 AllCops:
-  TargetRubyVersion: 4.0
+  TargetRubyVersion: 3.4
   NewCops: enable
 
 # We use standard as a linter and formatter instead Rubocop.
@@ -344,6 +342,18 @@ RSpec/IndexedLet:
 
 # We don't use named subject's
 RSpec/NamedSubject:
+  Enabled: false
+
+# Ignore example length
+RSpec/ExampleLength:
+  Enabled: false
+
+# Ignore maximum example group nesting
+RSpec/NestedGroups:
+  Enabled: false
+
+# Ignore subject after let declarations
+RSpec/LeadingSubject:
   Enabled: false
 
 # Naming rules:
