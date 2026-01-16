@@ -344,6 +344,14 @@ RSpec/IndexedLet:
 RSpec/NamedSubject:
   Enabled: false
 
+# Ignore example length
+RSpec/ExampleLength:
+  Enabled: false
+
+# Ignore maximum example group nesting
+RSpec/NestedGroups:
+  Enabled: false
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
