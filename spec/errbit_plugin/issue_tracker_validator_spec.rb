@@ -5,7 +5,7 @@ require "spec_helper"
 RSpec.describe ErrbitPlugin::IssueTrackerValidator do
   describe "#valid?" do
     context "with a complete class" do
-      klass = Class.new(ErrbitPlugin::IssueTracker) do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do # rubocop:disable RSpec/LeakyLocalVariable
         def self.label
           "foo"
         end
@@ -26,7 +26,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
           true
         end
 
-        def errors
+        def errors # rubocop:disable Naming/PredicateMethod
           true
         end
 
@@ -49,7 +49,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
     end
 
     context "with class not inherit from ErrbitPlugin::IssueTracker" do
-      klass = Class.new do
+      klass = Class.new do # rubocop:disable RSpec/LeakyLocalVariable
         def self.label
           "foo"
         end
@@ -73,7 +73,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
           true
         end
 
-        def errors
+        def errors # rubocop:disable Naming/PredicateMethod
           true
         end
 
@@ -102,7 +102,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
     end
 
     context "with no label method" do
-      klass = Class.new(ErrbitPlugin::IssueTracker) do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do # rubocop:disable RSpec/LeakyLocalVariable
         def self.note
           "foo"
         end
@@ -119,7 +119,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
           true
         end
 
-        def errors
+        def errors # rubocop:disable Naming/PredicateMethod
           true
         end
 
@@ -148,7 +148,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
     end
 
     context "with no icons method" do
-      klass = Class.new(ErrbitPlugin::IssueTracker) do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do # rubocop:disable RSpec/LeakyLocalVariable
         def self.note
           "foo"
         end
@@ -165,7 +165,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
           true
         end
 
-        def errors
+        def errors # rubocop:disable Naming/PredicateMethod
           true
         end
 
@@ -194,7 +194,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
     end
 
     context "without fields method" do
-      klass = Class.new(ErrbitPlugin::IssueTracker) do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do # rubocop:disable RSpec/LeakyLocalVariable
         def self.label
           "foo"
         end
@@ -211,7 +211,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
           true
         end
 
-        def errors
+        def errors # rubocop:disable Naming/PredicateMethod
           true
         end
 
@@ -240,7 +240,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
     end
 
     context "without configured? method" do
-      klass = Class.new(ErrbitPlugin::IssueTracker) do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do # rubocop:disable RSpec/LeakyLocalVariable
         def self.label
           "foo"
         end
@@ -257,7 +257,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
           {}
         end
 
-        def errors
+        def errors # rubocop:disable Naming/PredicateMethod
           true
         end
 
@@ -286,7 +286,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
     end
 
     context "without errors method" do
-      klass = Class.new(ErrbitPlugin::IssueTracker) do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do # rubocop:disable RSpec/LeakyLocalVariable
         def self.label
           "foo"
         end
@@ -332,7 +332,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
     end
 
     context "without create_issue method" do
-      klass = Class.new(ErrbitPlugin::IssueTracker) do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do # rubocop:disable RSpec/LeakyLocalVariable
         def self.label
           "foo"
         end
@@ -353,7 +353,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
           true
         end
 
-        def errors
+        def errors # rubocop:disable Naming/PredicateMethod
           true
         end
 
@@ -379,7 +379,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
 
     context "without close_issue method" do
       # this is an optional method
-      klass = Class.new(ErrbitPlugin::IssueTracker) do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do # rubocop:disable RSpec/LeakyLocalVariable
         def self.label
           "foo"
         end
@@ -400,7 +400,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
           true
         end
 
-        def errors
+        def errors # rubocop:disable Naming/PredicateMethod
           true
         end
 
@@ -425,7 +425,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
     end
 
     context "without url method" do
-      klass = Class.new(ErrbitPlugin::IssueTracker) do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do # rubocop:disable RSpec/LeakyLocalVariable
         def self.label
           "foo"
         end
@@ -446,7 +446,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
           true
         end
 
-        def errors
+        def errors # rubocop:disable Naming/PredicateMethod
           true
         end
 
@@ -471,7 +471,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
     end
 
     context "without note method" do
-      klass = Class.new(ErrbitPlugin::IssueTracker) do
+      klass = Class.new(ErrbitPlugin::IssueTracker) do # rubocop:disable RSpec/LeakyLocalVariable
         def self.label
           "foo"
         end
@@ -488,7 +488,7 @@ RSpec.describe ErrbitPlugin::IssueTrackerValidator do
           true
         end
 
-        def errors
+        def errors # rubocop:disable Naming/PredicateMethod
           true
         end
 
