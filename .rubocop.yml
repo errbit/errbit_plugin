@@ -1,10 +1,8 @@
-require:
-  - rubocop-disable_syntax
-
 plugins:
   - rubocop-performance
   - rubocop-rake
   - rubocop-rspec
+  - rubocop-disable_syntax
 
 AllCops:
   TargetRubyVersion: 4.0
