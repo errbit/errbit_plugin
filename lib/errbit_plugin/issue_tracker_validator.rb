@@ -37,7 +37,7 @@ module ErrbitPlugin
         end
       end
 
-      impl.all? { |value| value == true }
+      impl.all?(true)
     end
 
     def implements_class_methods?
@@ -50,7 +50,7 @@ module ErrbitPlugin
         end
       end
 
-      impl.all? { |value| value == true }
+      impl.all?(true)
     end
 
     def instance

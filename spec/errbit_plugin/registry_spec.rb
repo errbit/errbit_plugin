@@ -13,6 +13,7 @@ RSpec.describe ErrbitPlugin::Registry do
         "something"
       end
     end
+
     tracker
   end
 
@@ -62,11 +63,8 @@ RSpec.describe ErrbitPlugin::Registry do
           .with(tracker)
           .and_return(double(valid?: false, message: "foo", errors: ["one", "two"]))
 
-        begin
-          described_class.add_issue_tracker(tracker)
-        rescue ErrbitPlugin::IncompatibilityError => e
-          expect(e.message).to eq("one; two")
-        end
+        expect { described_class.add_issue_tracker(tracker) }
+          .to raise_error(ErrbitPlugin::IncompatibilityError, "one; two")
       end
     end
   end

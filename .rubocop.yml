@@ -352,6 +352,10 @@ RSpec/ExampleLength:
 RSpec/NestedGroups:
   Enabled: false
 
+# Ignore subject after let declarations
+RSpec/LeadingSubject:
+  Enabled: false
+
 # Naming rules:
 
 # Disable anonymous block forwarding.
