@@ -98,7 +98,7 @@ DEPENDENCIES
   rubocop-rake
   rubocop-rspec
   simplecov
-  standard
+  standard (= 1.53.0)
 
 CHECKSUMS
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
