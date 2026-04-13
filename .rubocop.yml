@@ -5,7 +5,7 @@ plugins:
   - rubocop-disable_syntax
 
 AllCops:
-  TargetRubyVersion: 4.00
+  TargetRubyVersion: 4.0
   NewCops: enable
 
 # We use standard as a linter and formatter instead Rubocop.
