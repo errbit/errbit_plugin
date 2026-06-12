@@ -27,13 +27,13 @@ to close the issue on the external issue tracker, if your plugin provides a
 method to do so.
 
 Your issue tracker plugin is responsible for providing the interface defined by
-ErrbitPlugin::IssueTracker. All of the required methods must be implemented and
-the class must extend ErrbitPlugin::IssueTracker. Here's an example:
+`ErrbitPlugin::IssueTracker`. All the required methods must be implemented and
+the class must extend `ErrbitPlugin::IssueTracker`. Here's an example:
 
 ```ruby
 class MyIssueTracker < ErrbitPlugin::IssueTracker
 
-  # A unique label for your tracker plugin used internally by errbit
+  # A unique label for your tracker plugin used internally by Errbit
   def self.label
     "my-tracker"
   end
@@ -43,7 +43,7 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   end
 
   # Form fields that will be presented to the administrator when setting up
-  # or editing the errbit app. The values we collect will be availble for use
+  # or editing the Errbit app. The values we collect will be available for use
   # later when we have an instance of this class.
   def self.fields
     {
@@ -70,7 +70,7 @@ class MyIssueTracker < ErrbitPlugin::IssueTracker
   end
 
   # If this tracker can be in a configured or non-configured state, you can let
-  # errbit know by returning a Boolean here
+  # Errbit know by returning a Boolean here
   def configured?
     # In this case, we'll say this issue tracker is configured when username
     # and password are set
